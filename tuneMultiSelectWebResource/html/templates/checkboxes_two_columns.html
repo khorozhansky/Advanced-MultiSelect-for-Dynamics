@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html> 
+<html>
+<head>
+    <title></title>
+    <script src="../../../ClientGlobalContext.js.aspx" type="text/javascript"></script>
+    <script type="text/javascript" src="../../js/libraries/jquery.js"></script>
+    <script type="text/javascript" src="../../js/libraries/knockout.js"></script>
+    <script type="text/javascript" src="../../js/CrmWebApiFacade.js"></script>
+    <script type="text/javascript" src="../../js/TuneMultiSelect.js"></script>
+    <link type="text/css" href="checkboxes_two_columns.css" rel="stylesheet" />
+</head>
+  <body>
+    <div class="loadingImageContainer" data-bind="visible: DataLoaded() == false">
+      <img alt="Loading..." src="../../image/progress.gif"/>
+    </div>
+    <div class="errorNotification" style="display: none" data-bind="visible: !!ErrorMessage()">
+      <span class="errorTitle">Sorry, an error occurred while loading the checkbox list.</span>
+      <p>
+        <textarea rows="8" cols="65" readonly="readonly" data-bind="text: ErrorMessage"></textarea>
+      </p>
+    </div>
+    <table class="container" style="display: none" data-bind="visible: DataLoaded()">
+      <tbody data-bind="foreach: ItemSetByRows">
+      <tr data-bind="foreach: $data">
+        <td>
+          <label>
+            <input data-bind="id: Id, checked: Value, title: Label, enable: $root.GetIsEnabled()" type="checkbox"/>
+            <span data-bind="text: Label"></span>
+          </label>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    
+    <script type="text/javascript">
+      xrmjQuery(document).ready(function () {
+        var columnCount = 2;
+        var vm = new window.TuneMultiSelect.ViewModel(columnCount);
+        vm.Initialize().then(
+          function () {
+            ko.applyBindings(vm);
+          },
+          function (error) {
+            ko.applyBindings(vm);
+          }
+        );
+      });
+    </script>
+  </body>
+</html>
