@@ -27,7 +27,7 @@
     /// <value>
     /// The change entity.
     /// </value>
-    public TEntity Target { get; private set; }
+    public TEntity Target { get; }
 
     /// <summary>
     /// Gets the pre image.
@@ -35,31 +35,19 @@
     /// <value>
     /// The pre image.
     /// </value>
-    public TEntity PreImage { get; private set; }
+    public TEntity PreImage { get; }
 
     /// <summary>
     /// Gets the id.
     /// </summary>
     /// <value>The id.</value>
-    public Guid Id
-    {
-      get
-      {
-        return this.PreImage == null ? this.Target.Id : this.PreImage.Id;
-      }
-    }
+    public Guid Id => this.PreImage?.Id ?? this.Target.Id;
 
     /// <summary>
     /// Gets the name of the logical.
     /// </summary>
     /// <value>The name of the logical.</value>
-    public string LogicalName
-    {
-      get
-      {
-        return this.PreImage == null ? this.Target.LogicalName : this.PreImage.LogicalName;
-      }
-    }
+    public string LogicalName => this.PreImage == null ? this.Target.LogicalName : this.PreImage.LogicalName;
 
     /// <summary>
     /// To the entity reference.

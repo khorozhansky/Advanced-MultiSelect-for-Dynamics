@@ -3,6 +3,7 @@
   using Microsoft.Xrm.Sdk;
   using TuneMultiSelect;
 
+  // ReSharper disable once RedundantExtendsListEntry
   public class Delete : Base, IPlugin
   {
     /// <summary>

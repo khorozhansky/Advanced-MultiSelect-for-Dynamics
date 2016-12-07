@@ -56,6 +56,7 @@
     /// <param name="secureConfig">
     /// The secure config.
     /// </param>
+    // ReSharper disable once PublicConstructorInAbstractClass
     public PluginBase(Type childClassName, string unsecureConfig = null, string secureConfig = null)
     {
       var entityType = typeof(TEntity);
@@ -73,19 +74,14 @@
     /// <value>
     /// The registered plugin steps.
     /// </value>
-    protected IList<PluginStepBase> RegisteredPluginSteps
-    {
-      get
-      {
-        return this.registeredPluginSteps ?? (this.registeredPluginSteps = new List<PluginStepBase>());
-      }
-    }
+    protected IList<PluginStepBase> RegisteredPluginSteps => 
+      this.registeredPluginSteps ?? (this.registeredPluginSteps = new List<PluginStepBase>());
 
     /// <summary>
     /// Gets the name of the child class.
     /// </summary>
     /// <value>The name of the child class.</value>
-    protected string ChildClassName { get; private set; }
+    protected string ChildClassName { get; }
 
     /// <summary>
     /// Executes the plug-in.
@@ -104,7 +100,7 @@
     {
       if (serviceProvider == null)
       {
-        throw new ArgumentNullException("serviceProvider");
+        throw new ArgumentNullException(nameof(serviceProvider));
       }
 
       // Construct the Local plug-in context.
@@ -332,7 +328,7 @@
       /// <summary>
       /// Backing Field for  <see cref="RegisteredEntityLogicalName" />
       /// </summary>
-      private string registeredEntityLogicalName;
+      private readonly string registeredEntityLogicalName;
 
       /// <summary>
       /// Backing Field for  <see cref="InputTargetAsEntity"/>
@@ -459,7 +455,7 @@
       {
         if (serviceProvider == null)
         {
-          throw new ArgumentNullException("serviceProvider");
+          throw new ArgumentNullException(nameof(serviceProvider));
         }
 
         this.registeredEntityLogicalName = registeredEntityLogicalName;
@@ -481,27 +477,17 @@
       /// Gets the plugin execution context.
       /// </summary>
       /// <value>The plugin execution context.</value>
-      public IPluginExecutionContext ExecContext
-      {
-        get
-        {
-          return this.executionContext ??
-            (this.executionContext = (IPluginExecutionContext)this.serviceProvider.GetService(typeof(IPluginExecutionContext))); 
-        }
-      }
+      public IPluginExecutionContext ExecContext => 
+        this.executionContext ??
+          (this.executionContext = (IPluginExecutionContext)this.serviceProvider.GetService(typeof(IPluginExecutionContext)));
 
       /// <summary>
       /// Gets the tracing service.
       /// </summary>
       /// <value>The tracing service.</value>
-      public ITracingService TracingService
-      {
-        get
-        {
-          return this.tracingService ??
-            (this.tracingService = (ITracingService)this.serviceProvider.GetService(typeof(ITracingService)));
-        }
-      }
+      public ITracingService TracingService => 
+        this.tracingService ??
+          (this.tracingService = (ITracingService)this.serviceProvider.GetService(typeof(ITracingService)));
 
       /// <summary>
       /// Gets the organization service for the "current user".
@@ -529,40 +515,25 @@
       /// <value>
       /// The organization service for system user.
       /// </value>
-      public IOrganizationService ServiceAsSystemUser
-      {
-        get
-        {
-          return this.serviceAsSystemUser ?? 
-            (this.serviceAsSystemUser = this.OrganizationServiceFactory.CreateOrganizationService(null));
-        }
-      }
+      public IOrganizationService ServiceAsSystemUser => 
+        this.serviceAsSystemUser ?? 
+          (this.serviceAsSystemUser = this.OrganizationServiceFactory.CreateOrganizationService(null));
 
       /// <summary>
       /// Gets the organization context for the "current user".
       /// </summary>
       /// <value>The organization context.</value>
-      public CrmContext OrgCtx
-      {
-        get
-        {
-          return this.orgCtx ??
-            (this.orgCtx = new CrmContext(this.Service) { MergeOption = MergeOption.NoTracking });
-        }
-      }
+      public CrmContext OrgCtx => 
+        this.orgCtx ??
+          (this.orgCtx = new CrmContext(this.Service) { MergeOption = MergeOption.NoTracking });
 
       /// <summary>
       /// Gets the organization context for a system user.
       /// </summary>
       /// <value>The organization context as system user.</value>
-      public CrmContext OrgCtxAsSystemUser
-      {
-        get
-        {
-          return this.orgCtxAsSystemUser ??
-            (this.orgCtxAsSystemUser = new CrmContext(this.ServiceAsSystemUser) { MergeOption = MergeOption.NoTracking });
-        }
-      }
+      public CrmContext OrgCtxAsSystemUser => 
+        this.orgCtxAsSystemUser ??
+          (this.orgCtxAsSystemUser = new CrmContext(this.ServiceAsSystemUser) { MergeOption = MergeOption.NoTracking });
 
       /// <summary>
       /// Gets the primary entity identifier.
@@ -570,13 +541,7 @@
       /// <value>
       /// The primary entity identifier.
       /// </value>
-      public Guid PrimaryEntityId
-      {
-        get
-        {
-          return this.ExecContext.PrimaryEntityId;
-        }
-      }
+      public Guid PrimaryEntityId => this.ExecContext.PrimaryEntityId;
 
       /// <summary>
       /// Gets the name of the primary entity.
@@ -584,13 +549,7 @@
       /// <value>
       /// The name of the primary entity.
       /// </value>
-      public string PrimaryEntityName
-      {
-        get
-        {
-          return this.ExecContext.PrimaryEntityName;
-        }
-      }
+      public string PrimaryEntityName => this.ExecContext.PrimaryEntityName;
 
       /// <summary>
       /// Gets the primary entity reference.
@@ -598,14 +557,9 @@
       /// <value>
       /// The primary entity reference.
       /// </value>
-      public EntityReference PrimaryEntityRef
-      {
-        get
-        {
-          return this.primaryEntityRef ?? 
-            (this.primaryEntityRef = new EntityReference(this.PrimaryEntityName, this.PrimaryEntityId));
-        }
-      }
+      public EntityReference PrimaryEntityRef => 
+        this.primaryEntityRef ?? 
+          (this.primaryEntityRef = new EntityReference(this.PrimaryEntityName, this.PrimaryEntityId));
 
       /// <summary>
       /// Gets the name of the entity for the handler registered.
@@ -613,13 +567,8 @@
       /// <value>
       /// The name of the base entity logical.
       /// </value>
-      public string RegisteredEntityLogicalName
-      {
-        get
-        {
-          return this.registeredEntityLogicalName;
-        }
-      }
+      // ReSharper disable once ConvertToAutoProperty
+      public string RegisteredEntityLogicalName => this.registeredEntityLogicalName;
 
       /// <summary>
       /// Gets or sets the input target.
@@ -670,13 +619,8 @@
       /// <value>
       /// The post image extended as <see cref="EntityExtended{TEntity}"/>.
       /// </value>
-      public EntityExtended<TEntity> TargetExt
-      {
-        get
-        {
-          return this.targetExt ?? (this.targetExt = new EntityExtended<TEntity>(this.InputTarget, this.PreImage));
-        }
-      }
+      public EntityExtended<TEntity> TargetExt => 
+        this.targetExt ?? (this.targetExt = new EntityExtended<TEntity>(this.InputTarget, this.PreImage));
 
       /// <summary>
       /// Gets the post image extended.
@@ -684,13 +628,8 @@
       /// <value>
       /// The post image extended as <see cref="EntityExtended{TEntity}"/>.
       /// </value>
-      public EntityExtended<TEntity> PostImageExt
-      {
-        get
-        {
-          return this.postImageExt ?? (this.postImageExt = new EntityExtended<TEntity>(this.PostImage, this.PreImage));
-        }
-      }
+      public EntityExtended<TEntity> PostImageExt => 
+        this.postImageExt ?? (this.postImageExt = new EntityExtended<TEntity>(this.PostImage, this.PreImage));
 
       /// <summary>
       /// Gets the input column set.
@@ -698,13 +637,8 @@
       /// <value>
       /// The input column set.
       /// </value>
-      public ColumnSet InputColumnSet
-      {
-        get
-        {
-          return this.inputColumnSet ?? (this.inputColumnSet = this.GetInputParameter<ColumnSet>(ColumnSetKey));
-        }
-      }
+      public ColumnSet InputColumnSet => 
+        this.inputColumnSet ?? (this.inputColumnSet = this.GetInputParameter<ColumnSet>(ColumnSetKey));
 
       /// <summary>
       /// Gets or sets the output business entity.
@@ -756,39 +690,24 @@
       /// <value>
       /// The output business entity collection.
       /// </value>
-      public EntityCollection OutputBusinessEntityCollection
-      {
-        get
-        {
-          return this.GetOutputParameter<EntityCollection>(BusinessEntityCollectionKey);
-        }
-      }
+      public EntityCollection OutputBusinessEntityCollection => 
+        this.GetOutputParameter<EntityCollection>(BusinessEntityCollectionKey);
 
       /// <summary>
       /// Gets the input target entity reference.
       /// </summary>
       /// <value>The input target entity reference.</value>
-      public EntityReference InputTargetEntityReference
-      {
-        get
-        {
-          return this.inputTargetAsEntityReference
-                 ?? (this.inputTargetAsEntityReference = this.GetInputParameter<EntityReference>(TargetKey));
-        }
-      }
+      public EntityReference InputTargetEntityReference => 
+        this.inputTargetAsEntityReference ?? 
+          (this.inputTargetAsEntityReference = this.GetInputParameter<EntityReference>(TargetKey));
 
       /// <summary>
       /// Gets the principal.
       /// </summary>
       /// <value>The principal.</value>
-      public EntityReference Principal
-      {
-        get
-        {
-          return this.principal
-                 ?? (this.principal = this.GetInputParameter<EntityReference>(PrincipalKey));
-        }
-      }
+      public EntityReference Principal => 
+        this.principal ?? 
+          (this.principal = this.GetInputParameter<EntityReference>(PrincipalKey));
 
       /// <summary>
       /// Gets or sets the access rights.
@@ -827,62 +746,37 @@
       /// Gets the state of the input.
       /// </summary>
       /// <value>The state of the input.</value>
-      public OptionSetValue State
-      {
-        get
-        {
-          return this.state ?? (this.state = this.GetInputParameter<OptionSetValue>(StateKey));
-        }
-      }
+      public OptionSetValue State => 
+        this.state ?? (this.state = this.GetInputParameter<OptionSetValue>(StateKey));
 
       /// <summary>
       /// Gets the input status.
       /// </summary>
       /// <value>The input status.</value>
-      public OptionSetValue Status
-      {
-        get
-        {
-          return this.status ?? (this.status = this.GetInputParameter<OptionSetValue>(StatusKey));
-        }
-      }
+      public OptionSetValue Status => 
+        this.status ?? (this.status = this.GetInputParameter<OptionSetValue>(StatusKey));
 
       /// <summary>
       /// Gets the relationship.
       /// </summary>
       /// <value>The relationship.</value>
-      public Relationship Relationship
-      {
-        get
-        {
-          return this.relationship ?? (this.relationship = this.GetInputParameter<Relationship>(RelationshipKey));
-        }
-      }
+      public Relationship Relationship => 
+        this.relationship ?? (this.relationship = this.GetInputParameter<Relationship>(RelationshipKey));
 
       /// <summary>
       /// Gets the related entities.
       /// </summary>
       /// <value>The related entities.</value>
-      public EntityReferenceCollection RelatedEntities
-      {
-        get
-        {
-          return this.relatedEntities
-                 ?? (this.relatedEntities = this.GetInputParameter<EntityReferenceCollection>(RelatedEntitiesKey));
-        }
-      }
+      public EntityReferenceCollection RelatedEntities => 
+        this.relatedEntities ?? 
+          (this.relatedEntities = this.GetInputParameter<EntityReferenceCollection>(RelatedEntitiesKey));
 
       /// <summary>
       /// Gets the ParameterXML parameter.
       /// </summary>
       /// <value>The parameter XML.</value>
-      public string ParameterXml
-      {
-        get
-        {
-          return this.parameterXml ?? (this.parameterXml = this.GetInputParameter<string>(ParameterXmlKey));
-        }
-      }
+      public string ParameterXml => 
+        this.parameterXml ?? (this.parameterXml = this.GetInputParameter<string>(ParameterXmlKey));
 
       /// <summary>
       /// Gets the subordinate reference.
@@ -890,14 +784,9 @@
       /// <value>
       /// The subordinate reference.
       /// </value>
-      public Guid? SubordinateId
-      {
-        get
-        {
-          return this.subordinateReference
-                 ?? (this.subordinateReference = this.GetInputParameter<Guid>(SubordinateIdKey));
-        }
-      }
+      public Guid? SubordinateId => 
+        this.subordinateReference ?? 
+          (this.subordinateReference = this.GetInputParameter<Guid>(SubordinateIdKey));
 
       /// <summary>
       /// Gets the entity moniker.
@@ -905,13 +794,8 @@
       /// <value>
       /// The entity moniker.
       /// </value>
-      public EntityReference EntityMoniker
-      {
-        get
-        {
-          return this.entityMoniker ?? (this.entityMoniker = this.GetInputParameter<EntityReference>(EntityMonikerKey));
-        }
-      }
+      public EntityReference EntityMoniker => 
+        this.entityMoniker ?? (this.entityMoniker = this.GetInputParameter<EntityReference>(EntityMonikerKey));
 
       /// <summary>
       /// Gets the query.
@@ -919,13 +803,8 @@
       /// <value>
       /// The query.
       /// </value>
-      public QueryExpression QueryExpr
-      {
-        get
-        {
-          return this.query ?? (this.query = this.GetInputParameter(QueryKey) as QueryExpression);
-        }
-      }
+      public QueryExpression QueryExpr => 
+        this.query ?? (this.query = this.GetInputParameter(QueryKey) as QueryExpression);
 
       /// <summary>
       /// Gets the pre image.
@@ -933,13 +812,8 @@
       /// <value>
       /// The pre image.
       /// </value>
-      public TEntity PreImage
-      {
-        get
-        {
-          return this.preImage ?? (this.preImage = this.GetPreImage());
-        }
-      }
+      public TEntity PreImage => 
+        this.preImage ?? (this.preImage = this.GetPreImage());
 
       /// <summary>
       /// Gets the post image.
@@ -947,25 +821,15 @@
       /// <value>
       /// The post image.
       /// </value>
-      public TEntity PostImage
-      {
-        get
-        {
-          return this.postImage ?? (this.postImage = this.GetPostImage());
-        }
-      }
+      public TEntity PostImage => 
+        this.postImage ?? (this.postImage = this.GetPostImage());
 
       /// <summary>
       /// Gets the assignee.
       /// </summary>
       /// <value>The assignee.</value>
-      public EntityReference Assignee
-      {
-        get
-        {
-          return this.assignee ?? (this.assignee = this.GetInputParameter<EntityReference>(AssigneeKey));
-        }
-      }
+      public EntityReference Assignee => 
+        this.assignee ?? (this.assignee = this.GetInputParameter<EntityReference>(AssigneeKey));
 
       /// <summary>
       /// Gets or sets the content of the update.
@@ -977,12 +841,14 @@
       {
         get
         {
-          if (this.updateContent == null)
+          if (this.updateContent != null)
           {
-            if (this.UpdateContentEntity != null)
-            {
-              this.updateContent = this.UpdateContentEntity.ToEntity<TEntity>();
-            }
+            return this.updateContent;
+          }
+
+          if (this.UpdateContentEntity != null)
+          {
+            this.updateContent = this.UpdateContentEntity.ToEntity<TEntity>();
           }
 
           return this.updateContent;
@@ -1021,14 +887,9 @@
       /// <value>
       /// The organization service factory.
       /// </value>
-      private IOrganizationServiceFactory OrganizationServiceFactory
-      {
-        get
-        {
-          return this.organizationServiceFactory ??
-            (this.organizationServiceFactory = (IOrganizationServiceFactory)this.serviceProvider.GetService(typeof(IOrganizationServiceFactory)));
-        }
-      }
+      private IOrganizationServiceFactory OrganizationServiceFactory => 
+        this.organizationServiceFactory ?? 
+          (this.organizationServiceFactory = (IOrganizationServiceFactory)this.serviceProvider.GetService(typeof(IOrganizationServiceFactory)));
 
       /// <summary>
       /// Resets the input target entity.
@@ -1120,7 +981,7 @@
       public TEntity GetPreImage(string imageName = null)
       {
         var entity = this.GetPreImageEntity(imageName);
-        return entity == null ? null : entity.ToEntity<TEntity>();
+        return entity?.ToEntity<TEntity>();
       }
 
       /// <summary>
@@ -1150,7 +1011,7 @@
       public TEntity GetPostImage(string imageName = null)
       {
         var entity = this.GetPostImageEntity(imageName);
-        return entity == null ? null : entity.ToEntity<TEntity>();
+        return entity?.ToEntity<TEntity>();
       }
 
       /// <summary>
@@ -1354,15 +1215,8 @@
 
         if (disposing)
         {
-          if (this.orgCtx != null)
-          {
-            this.orgCtx.Dispose();
-          }
-
-          if (this.orgCtxAsSystemUser != null)
-          {
-            this.orgCtxAsSystemUser.Dispose();
-          }
+          this.orgCtx?.Dispose();
+          this.orgCtxAsSystemUser?.Dispose();
         }
 
         this.disposed = true;

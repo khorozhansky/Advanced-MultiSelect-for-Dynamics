@@ -47,6 +47,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="html\templates\checkboxes_four_columns.css" />
+    <Content Include="html\templates\checkboxes_four_columns.html" />
+    <Content Include="html\templates\checkboxes_three_columns.css" />
+    <Content Include="html\templates\checkboxes_three_columns.html" />
     <Content Include="html\templates\checkboxes_two_columns.css" />
     <Content Include="html\templates\checkboxes_two_columns.html" />
     <Content Include="image\progress.gif" />

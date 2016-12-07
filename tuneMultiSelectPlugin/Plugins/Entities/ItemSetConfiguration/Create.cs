@@ -3,6 +3,7 @@
   using Microsoft.Xrm.Sdk;
   using TuneMultiSelect;
 
+  // ReSharper disable once RedundantExtendsListEntry
   public class Create : Base, IPlugin
   {
     /// <summary>
@@ -11,14 +12,6 @@
     public Create()
       : base(typeof(Create))
     {
-      this.RegisteredPluginSteps.Add(new PluginStepBase
-      {
-        Stage = Stage.PostOperation,
-        Mode = Mode.Synchronous,
-        MessageName = MessageName.Create,
-        Handler = this.CreatePostOperationSync
-      });
-
       this.RegisteredPluginSteps.Add(new PluginStepBase
       {
         Stage = Stage.PreOperation,
@@ -35,15 +28,6 @@
     private void CreatePreOperationSync(PluginContext pluginContext)
     {
       this.RunInManager(pluginContext, manager => manager.CreatePreOperationSync());
-    }
-
-    /// <summary>
-    /// Creates the post synchronize.
-    /// </summary>
-    /// <param name="pluginContext">The local context.</param>
-    private void CreatePostOperationSync(PluginContext pluginContext)
-    {
-      this.RunInManager(pluginContext, manager => manager.CreatePostOperationSync());
     }
   }
 }

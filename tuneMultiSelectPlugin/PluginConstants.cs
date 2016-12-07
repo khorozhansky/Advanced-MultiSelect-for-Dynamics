@@ -1,5 +1,7 @@
 ﻿namespace TuneMultiSelect
 {
+  using System.Diagnostics.CodeAnalysis;
+
   /// <summary>
   /// Pipeline Stage
   /// </summary>
@@ -25,6 +27,7 @@
   /// Add additional messages here as needed
   /// </remarks>
   /// </summary>
+  [SuppressMessage("ReSharper", "InconsistentNaming")]
   public enum MessageName
   {
     AddItem,

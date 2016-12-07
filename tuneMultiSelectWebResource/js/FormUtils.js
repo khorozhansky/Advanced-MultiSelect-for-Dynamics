@@ -57,11 +57,17 @@ TuneXrm.FormUtils = function () {
     var attr = Xrm.Page.getAttribute(ctrl.getName());
     var mandatory = attr.getRequiredLevel().toLowerCase() === "required";
     var value = attr.getValue();
-    if (mandatory && !value) {
-      return false;
+    var valid = false;
+    if (!value) {
+      valid = mandatory ? false : true;
+      if (valid) {
+        ctrl.clearNotification(notificationId);
+      }
+
+      return valid;
     }
 
-    var valid = getIsValidHandler(value);
+    valid = getIsValidHandler(value);
     if (valid) {
       ctrl.clearNotification(notificationId);
       return true;

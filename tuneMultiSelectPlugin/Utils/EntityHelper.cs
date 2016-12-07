@@ -80,7 +80,7 @@
 
         var collection = entity.GetAttributeValue<EntityCollection>(attributeName);
 
-        if (collection == null || collection.Entities == null)
+        if (collection?.Entities == null)
         {
           return defaultValue;
         }

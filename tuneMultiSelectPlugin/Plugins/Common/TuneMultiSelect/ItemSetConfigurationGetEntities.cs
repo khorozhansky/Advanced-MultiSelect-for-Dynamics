@@ -2,6 +2,7 @@
 {
   using Microsoft.Xrm.Sdk;
 
+  // ReSharper disable once RedundantExtendsListEntry
   public class ItemSetConfigurationGetEntities : PluginBase<Entity>, IPlugin
   {
     /// <summary>

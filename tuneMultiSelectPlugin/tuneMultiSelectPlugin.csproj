@@ -85,7 +85,7 @@
     <Compile Include="Logic\TuneMultiSelect\ItemSetChangeManager.cs" />
     <Compile Include="Logic\TuneMultiSelect\ItemSetConfigurationManager.cs" />
     <Compile Include="Logic\TuneMultiSelect\MarketingListItemSetChangeManager.cs" />
-    <Compile Include="Metadata\MetadataUtils.cs" />
+    <Compile Include="Utils\MetadataUtils.cs" />
     <Compile Include="PluginBase.cs" />
     <Compile Include="PluginConstants.cs" />
     <Compile Include="Plugins\Common\TuneMultiSelect\GetItemSet.cs" />
@@ -101,7 +101,6 @@
     <Compile Include="Utils\EntityHelper.cs" />
     <Compile Include="Utils\ExceptionHelper.cs" />
     <Compile Include="Utils\JsonHelper.cs" />
-    <Compile Include="Utils\MetadataHelper.cs" />
     <Compile Include="Utils\PropertyHelper.cs" />
     <Compile Include="Utils\TypeHelper.cs" />
     <Compile Include="Utils\ValueExtended.cs" />

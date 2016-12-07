@@ -47,12 +47,10 @@ TuneXrm.AdvFindUtils = function () {
   var setSrc = function (iframeName, entityLogicalName, fetchXmlText, onLoadErrorHandler) {
     var baseUrl = Xrm.Page.context.getClientUrl();
     var entityTypeCode = getEntityTypeCode(entityLogicalName);
-    console.log("entity: " + entityLogicalName);
     var url = baseUrl + "/SFA/goal/ParticipatingQueryCondition.aspx?entitytypecode=" + entityTypeCode;
     var iframeControl = Xrm.Page.ui.controls.get(iframeName);
     var iframeElem = iframeControl.getObject();
     iframeElem.addEventListener("load", function() {
-      console.log("query builder loaded");
       try {
         if (fetchXmlText) {
           try {

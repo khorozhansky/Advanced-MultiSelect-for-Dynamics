@@ -67,13 +67,7 @@
     /// <value>
     /// The value.
     /// </value>
-    public T Value
-    {
-      get
-      {
-        return this.IsSpecified ? this.NewValue : this.OldValue;
-      }
-    }
+    public T Value => this.IsSpecified ? this.NewValue : this.OldValue;
 
     /// <summary>
     /// Gets or sets the old value formatted.
@@ -91,13 +85,7 @@
     /// Gets the value formatted.
     /// </summary>
     /// <value>The value formatted.</value>
-    public string ValueFormatted
-    {
-      get
-      {
-        return this.IsSpecified ? this.NewValueFormatted : this.OldValueFormatted;
-      }
-    }
+    public string ValueFormatted => this.IsSpecified ? this.NewValueFormatted : this.OldValueFormatted;
 
     /// <summary>
     /// Gets a value indicating whether [the value is modified].
@@ -154,13 +142,7 @@
     /// <value>
     ///   <c>true</c> if [new value gets set to null]; otherwise, <c>false</c>.
     /// </value>
-    public bool IsSetToNull
-    {
-      get
-      {
-        return this.IsSpecified && this.NewValue == null;
-      }
-    }
+    public bool IsSetToNull => this.IsSpecified && this.NewValue == null;
 
     /// <summary>
     /// Gets a value indicating whether the value will be null after the action.
@@ -168,12 +150,6 @@
     /// <value>
     ///   <c>true</c> if [it will be null]; otherwise, <c>false</c>.
     /// </value>
-    public bool IsNull
-    {
-      get
-      {
-        return this.Value == null;
-      }
-    }
+    public bool IsNull => this.Value == null;
   }
 }

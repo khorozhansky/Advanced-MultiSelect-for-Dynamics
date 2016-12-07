@@ -4,7 +4,7 @@
   using System.Collections.Generic;
   using System.Linq;
 
-  using global::TuneMultiSelect.Entities;
+  using Entities;
 
   using Microsoft.Xrm.Sdk;
   using Microsoft.Xrm.Sdk.Messages;

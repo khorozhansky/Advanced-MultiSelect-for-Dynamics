@@ -21,7 +21,7 @@
 
       if (memberExpression == null)
       {
-        throw new ArgumentException(@"Expression must be a MemberExpression.", "propertyExpression");
+        throw new ArgumentException(@"Expression must be a MemberExpression.", nameof(propertyExpression));
       }
 
       return memberExpression.Member.Name;
@@ -46,20 +46,20 @@
       var memberExpression = propertyExpression.Body as MemberExpression;
       if (memberExpression == null)
       {
-        throw new ArgumentException(@"Expression must be a lambda expression like r=>r.SomeProperty.", "propertyExpression");
+        throw new ArgumentException(@"Expression must be a lambda expression like r=>r.SomeProperty.", nameof(propertyExpression));
       }
 
       var property = memberExpression.Member as PropertyInfo;
       if (property == null)
       {
-        throw new ArgumentException(@"Expression must be a lambda expression like r=>r.SomeProperty.", "propertyExpression");
+        throw new ArgumentException(@"Expression must be a lambda expression like r=>r.SomeProperty.", nameof(propertyExpression));
       }
 
       var attributes = property.GetCustomAttributes(typeof(TK), false);
       var attributeNotFound = attributes.Length == 0;
       if (attributeNotFound)
       {
-        throw new ArgumentException("The property does not have such attribute specified", "propertyExpression");
+        throw new ArgumentException("The property does not have such attribute specified", nameof(propertyExpression));
       }
 
       return (TK)attributes[0];

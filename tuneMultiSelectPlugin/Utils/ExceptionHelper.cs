@@ -76,10 +76,7 @@
         "An error occurred in the {0} plug-in. Exception: {1} Details: {2}";
 
       var message = string.Format(MessageFormatString, type, e.Message, additionalInfo);
-      if (tracingService != null)
-      {
-        tracingService.Trace(message);
-      }
+      tracingService?.Trace(message);
 
       var result = new InvalidPluginExecutionException(message, e);
       return result;

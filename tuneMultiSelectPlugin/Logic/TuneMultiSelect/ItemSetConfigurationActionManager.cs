@@ -5,6 +5,8 @@
   using System.Linq;
   using System.Runtime.Serialization;
 
+  using Entities;
+
   using Utils;
 
   using Microsoft.Xrm.Sdk;
@@ -24,9 +26,39 @@
     {
       var entityMetadataCollection = this.GetEntitiesMetadata().OrderBy(r => r.LogicalName).ToList();
       var entities = entityMetadataCollection.Select(GetEntityDto).Where(r => r != null).ToList();
-      var result = JsonHelper.SerializeJson(entities);
+      var entitiesResult = JsonHelper.SerializeJson(entities);
       const string EntityListParamName = "EntityList";
-      this.PluginContext.SetOutputParameter(EntityListParamName, result);
+      var pluginContext = this.PluginContext;
+      pluginContext.SetOutputParameter(EntityListParamName, entitiesResult);
+      var actions = GetActionList(pluginContext.OrgCtxAsSystemUser);
+      var actionsResult = JsonHelper.SerializeJson(actions);
+      const string ActionListParamName = "ActionList";
+      pluginContext.SetOutputParameter(ActionListParamName, actionsResult);
+    }
+
+    public static IList<ActionDto> GetActionList(CrmContext orgCtx)
+    {
+      const int WorkflowTypeCode = 1;
+      const int WorkflowCategoryCode = 3;
+      const string PrimaryEntity = "none";
+      const int ActiveStatusCode = 2;
+      var actions = (from w in orgCtx.WorkflowSet
+                     join ms in orgCtx.SdkMessageSet on w.SdkMessageId.Id equals ms.SdkMessageId.Value
+                     where (
+                      w.StateCode == WorkflowState.Activated
+                      && w.StatusCode != null && w.StatusCode.Value == ActiveStatusCode
+                      && w.IsCustomizable != null && w.IsCustomizable.Value
+                      && w.SdkMessageId != null
+                      && w.Type != null && w.Type.Value == WorkflowTypeCode
+                      && w.Category != null && w.Category.Value == WorkflowCategoryCode
+                      && w.PrimaryEntity == PrimaryEntity
+                      && w.UniqueName != "ItemSetConfigurationGetEntities"
+                      && w.UniqueName != "GetItemSet"
+                     )
+                     select new ActionDto { UniqueName = ms.Name, Name = w.Name })
+                  .ToList();
+
+      return actions.OrderBy(r => r.UniqueName).ToList();
     }
 
     private static EntityDto GetEntityDto(EntityMetadata entityMetadata)
@@ -131,7 +163,7 @@
                                                                                            AttributeTypeCode.Memo
                                                                                          }));
       attributeFilter1.Conditions.Add(
-        new MetadataConditionExpression("LogicalName", MetadataConditionOperator.NotIn, new string[] { "traversedpath" }));
+        new MetadataConditionExpression("LogicalName", MetadataConditionOperator.NotIn, new[] { "traversedpath" }));
 
       var attributeFilter2 = new MetadataFilterExpression(LogicalOperator.Or);
       attributeFilter2.Conditions.Add(
@@ -207,6 +239,16 @@
 
       [DataMember]
       public string ItemSetEntity { get; set; }
+    }
+
+    [DataContract]
+    public class ActionDto
+    {
+      [DataMember]
+      public string UniqueName { get; set; }
+
+      [DataMember]
+      public string Name { get; set; }
     }
   }
 

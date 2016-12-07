@@ -3,6 +3,7 @@
   using Logic.TuneMultiSelect;
   using Microsoft.Xrm.Sdk;
 
+  // ReSharper disable once RedundantExtendsListEntry
   public class GetItemSet : PluginBase<Entity>, IPlugin
   {
     /// <summary>

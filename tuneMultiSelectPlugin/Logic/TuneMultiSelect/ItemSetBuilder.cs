@@ -41,11 +41,6 @@
         throw new InvalidPluginExecutionException($"{ EntityLogicalNameParamName } parameter is not provided. Check if the Web Resource Properties has 'Pass record object-type code and unique identifier as parameters' checkbox checked.");
       }
 
-      if (string.IsNullOrWhiteSpace(this.recordIdString))
-      {
-        throw new InvalidPluginExecutionException($"{ RecordIdParamName } parameter is not provided. Check if the Web Resource Properties has 'Pass record object-type code and unique identifier as parameters' checkbox checked.");
-      }
-
       this.InitItemSetConfig();
     }
 
@@ -123,28 +118,33 @@
       }
 
       var linkedEntitySelectControlField = linkedEntityAlias + "." + entity1IntersectAttribute;
-      var recordId = this.recordIdString;
-      const string LinkedEntityXmlInjectionFormat = 
-        "  <link-entity name='{0}' alias='{1}' from='{2}' to='{2}' link-type='outer' visible='false' intersect='true'>" +
-        "    <attribute name='{3}'/>" +
-        "    <filter type='and'>" +
-        "      <condition attribute='{3}' operator='eq' value='{4}'/>" +
-        "    </filter>" +
-        "  </link-entity>" +
-        "</entity>";
+      var recordExists = !string.IsNullOrWhiteSpace(this.recordIdString);
+      if (recordExists)
+      {
+        var recordId = this.recordIdString;
+        const string LinkedEntityXmlInjectionFormat =
+          "  <link-entity name='{0}' alias='{1}' from='{2}' to='{2}' link-type='outer' visible='false' intersect='true'>" +
+          "    <attribute name='{3}'/>" +
+          "    <filter type='and'>" +
+          "      <condition attribute='{3}' operator='eq' value='{4}'/>" +
+          "    </filter>" +
+          "  </link-entity>" +
+          "</entity>";
 
-      var linkedEntityXml =
-        string.Format(
-          LinkedEntityXmlInjectionFormat,
-          intersectEntityName, 
-          linkedEntityAlias, 
-          entity2IntersectAttribute, 
-          entity1IntersectAttribute,
-          recordId);
+        var linkedEntityXml =
+          string.Format(
+            LinkedEntityXmlInjectionFormat,
+            intersectEntityName,
+            linkedEntityAlias,
+            entity2IntersectAttribute,
+            entity1IntersectAttribute,
+            recordId);
 
-      var fetchXmlToExecute = fetchXml.Replace("</entity>", linkedEntityXml);
+        fetchXml = fetchXml.Replace("</entity>", linkedEntityXml);
+      }
+
       var service = this.PluginContext.Service;
-      var fetchExpression = new FetchExpression(fetchXmlToExecute);
+      var fetchExpression = new FetchExpression(fetchXml);
       var entityCollection = service.RetrieveMultiple(fetchExpression);
       var entities = entityCollection.Entities;
       var labelFieldName = this.ItemSetConfig.tunexrm_LabelAttributeName;
@@ -155,7 +155,8 @@
             {
               Id = entity.Id,
               Label = entity.GetAttributeValue<string>(labelFieldName),
-              Selected = entity.GetAttributeValue<AliasedValue>(linkedEntitySelectControlField) != null
+              Selected = 
+                recordExists && entity.GetAttributeValue<AliasedValue>(linkedEntitySelectControlField) != null
             }).ToList();
     }
 

@@ -1,5 +1,7 @@
-﻿namespace TuneMultiSelect.Metadata
+﻿namespace TuneMultiSelect.Utils
 {
+  using System;
+
   using Microsoft.Xrm.Sdk;
   using Microsoft.Xrm.Sdk.Messages;
   using Microsoft.Xrm.Sdk.Metadata;
@@ -20,14 +22,21 @@
     /// </returns>
     private static RelationshipMetadataBase GetRelationshipMetadata(IPluginContext pluginContext, string name)
     {
-      var service = pluginContext.ServiceAsSystemUser;
-      var request = new RetrieveRelationshipRequest
+      try
       {
-        Name = name
-      };
+        var service = pluginContext.ServiceAsSystemUser;
+        var request = new RetrieveRelationshipRequest
+        {
+          Name = name
+        };
 
-      var response = (RetrieveRelationshipResponse)service.Execute(request);
-      return response.RelationshipMetadata;
+        var response = (RetrieveRelationshipResponse)service.Execute(request);
+        return response.RelationshipMetadata;
+      }
+      catch (Exception)
+      {
+        throw new InvalidPluginExecutionException($"The {name} relationship is not found.");
+      }
     }
 
     public static ManyToManyRelationshipMetadata GetManyToManyRelationshipMetadata(IPluginContext pluginContext, string name)

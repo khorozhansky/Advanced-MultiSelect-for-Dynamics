@@ -12,7 +12,7 @@ TuneXrm.ItemSetConfiguration.Form = function () {
 
   var p, fu, af, xl;
 
-  var entityList;
+  var entityList, actionList;
 
   var ctrls = {
     entityName: null,
@@ -20,10 +20,11 @@ TuneXrm.ItemSetConfiguration.Form = function () {
     relationshipName: null,
     savingAttributeName: null,
     labelAttributeName: null,
-    saveChangesHandler: null,
+    saveAction: null,
     fetchXml: null,
     useQueryBuilder: null,
-    queryBuilderIframe: null
+    queryBuilderIframe: null,
+    description: null
 };
 
   var attrs = {
@@ -33,7 +34,7 @@ TuneXrm.ItemSetConfiguration.Form = function () {
     savingAttributeName: null,
     itemSetEntityName: null,
     labelAttributeName: null,
-    saveChangesHandler: null,
+    saveAction: null,
     fetchXml: null,
     useQueryBuilder: null
   };
@@ -51,9 +52,11 @@ TuneXrm.ItemSetConfiguration.Form = function () {
     ctrls.relationshipName = p.getControl("tunexrm_relationshipname");
     ctrls.savingAttributeName = p.getControl("tunexrm_dummysavingfield");
     ctrls.labelAttributeName = p.getControl("tunexrm_labelattributename");
-    ctrls.saveChangesHandler = p.getControl("tunexrm_savechangeshandler");
+    ctrls.saveAction = p.getControl("tunexrm_savechangeshandler");
     ctrls.fetchXml = p.getControl("tunexrm_fetchxml");
     ctrls.useQueryBuilder = p.getControl("tunexrm_usequerybuilder");
+    ctrls.queryBuilderIframe = p.getControl(queryBuilderIframeName);
+    ctrls.description = p.getControl("tunexrm_description");
 
     attrs.entityName = ctrls.entityName.getAttribute();
     attrs.itemSetName = ctrls.itemSetName.getAttribute();
@@ -61,10 +64,9 @@ TuneXrm.ItemSetConfiguration.Form = function () {
     attrs.savingAttributeName = ctrls.savingAttributeName.getAttribute();
     attrs.itemSetEntityName = p.getAttribute("tunexrm_itemsetentityname");
     attrs.labelAttributeName = ctrls.labelAttributeName.getAttribute();
-    attrs.saveChangesHandler = ctrls.saveChangesHandler.getAttribute();
+    attrs.saveAction = ctrls.saveAction.getAttribute();
     attrs.fetchXml = ctrls.fetchXml.getAttribute();
     attrs.useQueryBuilder = ctrls.useQueryBuilder.getAttribute();
-    ctrls.queryBuilderIframe = p.getControl(queryBuilderIframeName);
 
     attrs.useQueryBuilder.setSubmitMode("never");
   };
@@ -83,6 +85,27 @@ TuneXrm.ItemSetConfiguration.Form = function () {
     for (var i = 0; i < entityList.length; i++) {
       if (entityList[i].LogicalName === entityLogicalName) {
         return entityList[i];
+      }
+    }
+
+    return null;
+  }
+
+  var getAction = function (uniqueName, ignoreCase) {
+    if (!uniqueName) {
+      return null;
+    }
+
+    uniqueName = uniqueName.trim();
+    ignoreCase = ignoreCase || false;
+    if (ignoreCase) {
+      uniqueName = uniqueName.toLowerCase();
+    }
+
+    for (var i = 0; i < actionList.length; i++) {
+      var select = ignoreCase ? (actionList[i].UniqueName.toLowerCase() === uniqueName) : (actionList[i].UniqueName === uniqueName);
+      if (select) {
+        return actionList[i];
       }
     }
 
@@ -218,6 +241,7 @@ TuneXrm.ItemSetConfiguration.Form = function () {
     var query = "tunexrm_ItemSetConfigurationGetEntities";
     CrmWebApiFacade.ExecuteAction(query).then(function (result) {
       entityList = JSON.parse(result["EntityList"]);
+      actionList = JSON.parse(result["ActionList"]);
       dfd.resolve();
     }, function (error) {
       dfd.reject(error);
@@ -268,6 +292,14 @@ TuneXrm.ItemSetConfiguration.Form = function () {
       processInvalidValue();
       return false;
     }
+  };
+
+  var validateSaveAction = function () {
+
+    return fu.ValidateAutocomplete(ctrls.saveAction, function (value) {
+      var record = getAction(value);
+      return !!record && record.UniqueName === value;
+    }, " (Or, leave the field empty.)");
   };
 
   var validateLabelAttributeName = function (ctx) {
@@ -392,6 +424,10 @@ TuneXrm.ItemSetConfiguration.Form = function () {
     onDummySavingAttributeNameChange(ctx);
   };
 
+  var onSaveActionChange = function (ctx) {
+    validateSaveAction();
+  };
+
   var onEntityNameKeyPress = function(ctx) {
     fu.ShowAutocomplete(ctrls.entityName, entityList, function (userInput, recordIndex) {
       var record = entityList[recordIndex];
@@ -404,6 +440,22 @@ TuneXrm.ItemSetConfiguration.Form = function () {
         userInput.length === 0 || logicalName.indexOf(userInput) >= 0 || displayName.indexOf(userInput) >= 0;
       if (addItem) {
         return { id: recordIndex, fields: [logicalName, displayName], icon: icon };
+      }
+
+      return null;
+    });
+  };
+
+  var onSaveActionKeyPress = function (ctx) {
+    fu.ShowAutocomplete(ctrls.saveAction, actionList, function (userInput, recordIndex) {
+      var record = actionList[recordIndex];
+      var uniqueName = record.UniqueName;
+      var displayName = record.Name;
+      var icon = "/_imgs/ico_16_4703.png";
+      var addItem =
+        userInput.length === 0 || uniqueName.indexOf(userInput) >= 0 || displayName.indexOf(userInput) >= 0;
+      if (addItem) {
+        return { id: recordIndex, fields: [uniqueName, displayName], icon: icon };
       }
 
       return null;
@@ -487,6 +539,7 @@ TuneXrm.ItemSetConfiguration.Form = function () {
     ctrls.relationshipName.addOnKeyPress(onRelationshipNameKeyPress);
     ctrls.savingAttributeName.addOnKeyPress(onSavingAttributeNameKeyPress);
     ctrls.labelAttributeName.addOnKeyPress(onLabelAttributeNameKeyPress);
+    ctrls.saveAction.addOnKeyPress(onSaveActionKeyPress);
   };
 
   var unlockOnLoad = function () {
@@ -495,7 +548,8 @@ TuneXrm.ItemSetConfiguration.Form = function () {
     ctrls.relationshipName.setDisabled(false);
     ctrls.savingAttributeName.setDisabled(false);
     ctrls.labelAttributeName.setDisabled(false);
-    ctrls.saveChangesHandler.setDisabled(false);
+    ctrls.saveAction.setDisabled(false);
+    ctrls.description.setDisabled(false);
   };
 
   var initialDataLoad = function () {
@@ -522,6 +576,7 @@ TuneXrm.ItemSetConfiguration.Form = function () {
       fu.GetInputElemByControl(ctrls.relationshipName).onfocus = function () { onRelationshipNameKeyPress(); }
       fu.GetInputElemByControl(ctrls.savingAttributeName).onfocus = function () { onSavingAttributeNameKeyPress(); }
       fu.GetInputElemByControl(ctrls.labelAttributeName).onfocus = function () { onLabelAttributeNameKeyPress(); }
+      fu.GetInputElemByControl(ctrls.saveAction).onfocus = function () { onSaveActionKeyPress(); }
     } catch (e) {
     } 
   };
@@ -596,6 +651,7 @@ TuneXrm.ItemSetConfiguration.Form = function () {
     OnDummySavingAttributeNameChange: onDummySavingAttributeNameChange,
     OnFetchXmlChange: onFetchXmlChange,
     OnLabelAttributeNameChange: onLabelAttributeNameChange,
-    OnQueryEditModeChange: onQueryEditModeChange
+    OnQueryEditModeChange: onQueryEditModeChange,
+    OnSaveActionChange: onSaveActionChange
   };
 }();

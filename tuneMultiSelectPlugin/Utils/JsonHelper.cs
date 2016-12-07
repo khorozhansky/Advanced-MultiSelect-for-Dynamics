@@ -10,6 +10,7 @@
     {
       var stream = new MemoryStream();
       var serializer = new DataContractJsonSerializer(typeof(T));
+      // ReSharper disable once UnusedVariable
       var settings = new DataContractJsonSerializerSettings();
       serializer.WriteObject(stream, t);
       var jsonString = Encoding.UTF8.GetString(stream.ToArray());

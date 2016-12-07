@@ -1,11 +1,7 @@
 ﻿namespace TuneMultiSelect.Plugins.Entities.ItemSetConfiguration
 {
   using System;
-  using System.Collections.Generic;
-  using System.Linq;
-  using System.Text;
-  using System.Threading.Tasks;
-  using Logic;
+
   using Logic.TuneMultiSelect;
   using TuneMultiSelect;
   using TuneMultiSelect.Entities;
