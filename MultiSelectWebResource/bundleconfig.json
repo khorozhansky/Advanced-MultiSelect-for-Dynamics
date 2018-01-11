@@ -1,0 +1,116 @@
+[
+  {
+    "outputFileName": "js/entities/ItemSetConfiguration/Form/AddControlWizardForm.min.js",
+    "inputFiles": [
+      "js/entities/ItemSetConfiguration/Form/AddControlWizardForm.js"
+    ]
+  },
+  {
+    "outputFileName": "js/entities/ItemSetConfiguration/Form/Common.min.js",
+    "inputFiles": [
+      "js/entities/ItemSetConfiguration/Form/Common.js"
+    ]
+  },
+  {
+    "outputFileName": "js/entities/ItemSetConfiguration/Form/MainForm.min.js",
+    "inputFiles": [
+      "js/entities/ItemSetConfiguration/Form/MainForm.js"
+    ]
+  },
+  {
+    "outputFileName": "js/entities/ItemSetConfiguration/ImportConfigurations/import.min.js",
+    "inputFiles": [
+      "js/entities/ItemSetConfiguration/ImportConfigurations/import.js"
+    ]
+  },
+  {
+    "outputFileName": "js/entities/ItemSetConfiguration/View/ViewRibbon.min.js",
+    "inputFiles": [
+      "js/entities/ItemSetConfiguration/View/ViewRibbon.js"
+    ]
+  },
+  {
+    "outputFileName": "js/AdvFindUtils.min.js",
+    "inputFiles": [
+      "js/AdvFindUtils.js"
+    ]
+  },
+  {
+    "outputFileName": "js/CrmWebApiFacade.min.js",
+    "inputFiles": [
+      "js/CrmWebApiFacade.js"
+    ]
+  },
+  {
+    "outputFileName": "js/FormSaveModes.min.js",
+    "inputFiles": [
+      "js/FormSaveModes.js"
+    ]
+  },
+  {
+    "outputFileName": "js/FormTypes.min.js",
+    "inputFiles": [
+      "js/FormTypes.js"
+    ]
+  },
+  {
+    "outputFileName": "js/FormUtils.min.js",
+    "inputFiles": [
+      "js/FormUtils.js"
+    ]
+  },
+  {
+    "outputFileName": "js/XmlUtils.min.js",
+    "inputFiles": [
+      "js/XmlUtils.js"
+    ]
+  },
+  {
+    "outputFileName": "html/templates/checkboxes_one_column.min.css",
+    "inputFiles": [
+      "html/templates/checkboxes_one_column.css"
+    ]
+  },
+  {
+    "outputFileName": "html/templates/checkboxes_three_columns.min.css",
+    "inputFiles": [
+      "html/templates/checkboxes_three_columns.css"
+    ]
+  },
+  {
+    "outputFileName": "html/templates/checkboxes_two_columns.min.css",
+    "inputFiles": [
+      "html/templates/checkboxes_two_columns.css"
+    ]
+  },
+  {
+    "outputFileName": "html/templates/checkboxes_four_columns.min.css",
+    "inputFiles": [
+      "html/templates/checkboxes_four_columns.css"
+    ]
+  },
+  {
+    "outputFileName": "html/ImportConfigurations/import.min.css",
+    "inputFiles": [
+      "html/ImportConfigurations/import.css"
+    ]
+  },
+  {
+    "outputFileName": "html/templates/checkboxes_one_column_with_description.min.css",
+    "inputFiles": [
+      "html/templates/checkboxes_one_column_with_description.css"
+    ]
+  },
+  {
+    "outputFileName": "html/ImportConfigurations/import.min.html",
+    "inputFiles": [
+      "html/ImportConfigurations/import.html"
+    ]
+  },
+  {
+    "outputFileName": "js/AdvancedMultiSelect.min.js",
+    "inputFiles": [
+      "js/AdvancedMultiSelect.js"
+    ]
+  }
+]

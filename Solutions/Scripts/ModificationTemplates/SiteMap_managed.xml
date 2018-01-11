@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SiteMap>
+  <SiteMap IntroducedVersion="7.0.0.0">
+    <Area Id="Settings" ResourceId="Area_Settings" ShowGroups="true" Icon="/_imgs/settings_24x24.gif" ToolTipResourseId="Settings_Area_ToolTip" DescriptionResourceId="Settings_Area_Description" IntroducedVersion="7.0.0.0" ordinalvalue="3">
+      <Group Id="Application" ResourceId="Menu_Label_Application" DescriptionResourceId="Menu_Label_Application" ToolTipResourseId="Menu_Label_Application_ToolTip" IntroducedVersion="8.1.0.0" ordinalvalue="5" solutionaction="Modified" />
+      <Group Id="Extensions" ResourceId="Group_Extensions" ordinalvalue="4" solutionaction="Added">
+        <SubArea Id="pavelkh_advancedmultiselectitemsetconfiguration" Entity="pavelkh_advancedmultiselectitemsetconfiguration" ordinalvalue="0" />
+      </Group>
+    </Area>
+  </SiteMap>
+</SiteMap>

@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html> 
+<html>
+<head>
+  <title>AdvancedMultiSelect Sample Data Configuration</title>
+  <script type="text/javascript" src="../../js/libraries/jquery.js"></script>
+  <script type="text/javascript" src="../../js/libraries/knockout.js"></script>
+  <script type="text/javascript" src="../../js/CrmWebApiFacade.js"></script>
+  <script src="../../../ClientGlobalContext.js.aspx" type="text/javascript"></script>
+  <script src="../../js/InstallDemoData/InstallDemoData.js"></script>
+  <style>
+    body {
+      border: 0px; 
+      background-color: white; 
+      margin: 0px; 
+      font-family: Segoe UI; 
+      font-size: 11px;
+      color: #666666;
+      margin: 10px;
+    }    
+  </style>
+</head>
+<body>
+<h2>AdvancedMultiSelect Sample Data Configuration</h2>
+
+<div style="display: none" data-bind="visible: InProgress()">
+  <img alt="Loading..." src="../../image/progress.gif"/>
+</div>
+
+<div style="display: none" data-bind="visible: Installed() && InProgress() == false">
+  <h3>Sample data is installed.</h3>
+</div>
+
+<div style="display: none" data-bind="visible: Installed() == false && InProgress() == false">
+  <h3>Sample data is not installed.</h3>
+  <h4>Press the button below to add sample records to ItemSet Configurations as well as to the 'Marketing List' and the custom 'Interest' entities</h4>
+  <button data-bind="click: Install">Install Sample Data</button>
+</div>
+
+<script type="text/javascript">
+  window.xrmjQuery(document).ready(function () {
+    var vm = new window.AdvancedMultiSelect.InstallDemoData.ViewModel();
+    ko.applyBindings(vm);
+    vm.Initialize();
+  });
+</script>
+</body>
+</html>

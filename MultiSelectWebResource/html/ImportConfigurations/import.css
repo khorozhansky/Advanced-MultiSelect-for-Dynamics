@@ -1,0 +1,89 @@
+﻿body, html {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+.wrapper {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  -ms-flex-direction: column;
+  border: 0px; 
+  background-color: white; 
+  font-family: Segoe UI; 
+  font-size: 11px; 
+  color: #666666
+}
+
+.header {
+  height: 30px;
+  padding: 10px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.main {
+  flex-grow: 1;
+  padding: 10px;
+}
+
+.footer {
+  padding: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+input[type=file] {
+  height: 22px;
+  font-size: 11px;
+}
+
+input[type=button] {
+  line-height: 16px;
+  height: 20px;
+  width: 84px;
+  text-align: center;
+  cursor: pointer;
+  border-width: 1px;
+  border-style: solid;
+  background-repeat: repeat-x;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 10px;
+  border-color: #666666;
+  background-image: url('../../image/button_gradient.png');
+}
+
+input[type=button].footerButton {
+  height: 22px;
+  overflow: visible;
+  margin-left: 8px;
+  min-width: 84px;
+  width: auto;
+}
+
+label {
+  margin-right: 12px;
+}
+
+div.loadingImageContainer {
+  margin-left: 30px;
+  margin-top: 30px;
+  text-align: center;
+}
+
+div.errorNotification {
+  margin: 10px;
+}
+
+span.errorTitle {
+  font-size: 1.25em;
+  font-weight: bold;
+  color: red;
+}
+
+div.modeNotification {
+  font-style: italic
+}

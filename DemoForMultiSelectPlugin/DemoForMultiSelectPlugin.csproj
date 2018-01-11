@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5E20CEBD-E4DC-4376-9012-42CDBDA8F497}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DemoForAdvancedMultiSelectPlugin</RootNamespace>
+    <AssemblyName>DemoForAdvancedMultiSelectPlugin</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Crm.Sdk.Proxy, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.CoreAssemblies.8.1.0.2\lib\net452\Microsoft.Crm.Sdk.Proxy.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.6.1.7600.16394\lib\net35\Microsoft.IdentityModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xrm.Sdk, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.CoreAssemblies.8.1.0.2\lib\net452\Microsoft.Xrm.Sdk.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\MultiSelectPlugin\Exception\PluginExceptionBase.cs">
+      <Link>Exception\PluginExceptionBase.cs</Link>
+    </Compile>
+    <Compile Include="..\MultiSelectPlugin\Exception\PluginIgnoredException.cs">
+      <Link>Exception\PluginIgnoredException.cs</Link>
+    </Compile>
+    <Compile Include="..\MultiSelectPlugin\IPluginContext.cs">
+      <Link>IPluginContext.cs</Link>
+    </Compile>
+    <Compile Include="..\MultiSelectPlugin\Logic\ManagerBase.cs">
+      <Link>Logic\ManagerBase.cs</Link>
+    </Compile>
+    <Compile Include="..\MultiSelectPlugin\PluginBase.cs">
+      <Link>PluginBase.cs</Link>
+    </Compile>
+    <Compile Include="..\MultiSelectPlugin\PluginConstants.cs">
+      <Link>PluginConstants.cs</Link>
+    </Compile>
+    <Compile Include="..\MultiSelectPlugin\Utils\EntityExtended.cs">
+      <Link>Utils\EntityExtended.cs</Link>
+    </Compile>
+    <Compile Include="..\MultiSelectPlugin\Utils\EntityHelper.cs">
+      <Link>Utils\EntityHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\MultiSelectPlugin\Utils\ExceptionHelper.cs">
+      <Link>Utils\ExceptionHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\MultiSelectPlugin\Utils\JsonHelper.cs">
+      <Link>Utils\JsonHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\MultiSelectPlugin\Utils\MetadataUtils.cs">
+      <Link>Utils\MetadataUtils.cs</Link>
+    </Compile>
+    <Compile Include="..\MultiSelectPlugin\Utils\PropertyHelper.cs">
+      <Link>Utils\PropertyHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\MultiSelectPlugin\Utils\TypeHelper.cs">
+      <Link>Utils\TypeHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\MultiSelectPlugin\Utils\ValueExtended.cs">
+      <Link>Utils\ValueExtended.cs</Link>
+    </Compile>
+    <Compile Include="..\MultiSelectPlugin\Utils\XmlStringSerializeHelper.cs">
+      <Link>Utils\XmlStringSerializeHelper.cs</Link>
+    </Compile>
+    <Compile Include="CrmProxy\CrmProxy.cs" />
+    <Compile Include="Logic\InstallDemoData\InstallDemoDataManager.cs" />
+    <Compile Include="Plugins\InstallDemoData\InstallDemoData.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="key.snk" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CrmProxy\EarlyBoundGeneratorSettings\DLaB.EarlyBoundGenerator.DefaultSettings.xml" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

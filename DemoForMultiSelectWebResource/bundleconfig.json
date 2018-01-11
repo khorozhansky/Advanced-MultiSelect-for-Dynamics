@@ -1,0 +1,8 @@
+[
+  {
+    "outputFileName": "js/InstallDemoData/InstallDemoData.min.js",
+    "inputFiles": [
+      "js/InstallDemoData/InstallDemoData.js"
+    ]
+  }
+]
