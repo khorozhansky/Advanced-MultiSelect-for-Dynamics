@@ -38,20 +38,46 @@
 **All the _key functionality_ uses "supported" customization.**
 There is only a small part of "unsupported" customization in the "Configuration Wizard". Via an embedded 'advanced find' feature, it assists you in specifying query to build a list of related options. As for now, it works for all versions above. However, even in case this part stops working _in further Dynamics version_, it won't cause an error and you as always will be able to specify the query via Fetch Xml directly.
 
+
+
+
 # Installation and Configuration Guide
 
 _**As for now Installation and Configuration guide / description is yet to complete (ETA is 2018-01-14)**_
+
 
 ## Base Solution Installation
 Install a 'Base 'Advanced MultiSelect for Dynamics' Managed solution from here [Last Release](https://github.com/khorozhansky/Advanced-MultiSelect-for-Dynamics/releases/latest) 
 
 ## Demo Solution Installation
 Install a DEMO Managed solution from here [Last Release](https://github.com/khorozhansky/Advanced-MultiSelect-for-Dynamics/releases/latest)  
+The solution contains additional custom entity (Interests) and additional demo forms for Account and Contact entities.
+Once the the solution has been installed, you need to install demo data ('Item Set' configurations and sample data in Interests entity):
+![MultSelect Control on Form](Docs/Images/InstallDemo_01.png)
+![MultSelect Control on Form](Docs/Images/InstallDemo_02.png)
+![MultSelect Control on Form](Docs/Images/InstallDemo_03.png)
 
-
+Now you can open an Account or Contact record and switch to the "DEMO" form:
+![MultSelect Control on Form](Docs/Images/Demo_02.png)
 
 ## 'Item Set' Configurations
+... is yet to complete ...
+![MultSelect Control on Form](Docs/Images/Configuration_01.png)
+![MultSelect Control on Form](Docs/Images/Configuration_02.png)
 ...
-
+![MultSelect Control on Form](Docs/Images/Configuration_05.png)
+![MultSelect Control on Form](Docs/Images/Configuration_06.png)
+![MultSelect Control on Form](Docs/Images/Configuration_07.png)
+![MultSelect Control on Form](Docs/Images/Configuration_08.png)
+![MultSelect Control on Form](Docs/Images/Configuration_09.png)
+![MultSelect Control on Form](Docs/Images/Configuration_10.png)
+![MultSelect Control on Form](Docs/Images/Configuration_11.png)
+![MultSelect Control on Form](Docs/Images/Configuration_12.png)
+![MultSelect Control on Form](Docs/Images/Configuration_13.png)
+![MultSelect Control on Form](Docs/Images/Configuration_14.png)
+![MultSelect Control on Form](Docs/Images/Configuration_15.png)
+![MultSelect Control on Form](Docs/Images/Configuration_16.png)
+![MultSelect Control on Form](Docs/Images/Configuration_17.png)
+![MultSelect Control on Form](Docs/Images/Configuration_18.png)
 
 This project is a brand new revised and improved version of the https://tunemulticheckbox.codeplex.com project
