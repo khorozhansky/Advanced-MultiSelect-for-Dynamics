@@ -43,9 +43,13 @@ There is only a small part of "unsupported" customization in the "Configuration 
 _**As for now Installation and Configuration guide / description is yet to complete (ETA is 2018-01-14)**_
 
 ## Base Solution Installation
-...
+Install a 'Base 'Advanced MultiSelect for Dynamics' Managed solution from here [Last Release](https://github.com/khorozhansky/Advanced-MultiSelect-for-Dynamics/releases/latest) 
+
 ## Demo Solution Installation
-...
+Install a DEMO Managed solution from here [Last Release](https://github.com/khorozhansky/Advanced-MultiSelect-for-Dynamics/releases/latest)  
+
+
+
 ## 'Item Set' Configurations
 ...
 
