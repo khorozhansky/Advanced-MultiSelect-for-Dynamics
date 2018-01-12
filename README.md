@@ -31,7 +31,7 @@
 * Works for both Online and On-Premise
 * Works for Dynamics CRM 2016 Update 1 (v8.1) and Dynamics 365 (v8.2 and v9.0)
 
-* Both Managed and Unmanaged Solutions are provided. Note:  
+* Both Managed and Unmanaged Solutions are provided.  
 * In addition to the base solution, a special DEMO solution can be installed which contains some ready-to-use examples (you can simply remove it (install Managed one)
 
 ### Does it use "supported" customization?
