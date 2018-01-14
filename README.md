@@ -43,7 +43,7 @@ There is only a small part of "unsupported" customization in the "Configuration 
 
 # Installation and Configuration Guide
 
-_**As for now Installation and Configuration guide / description is yet to complete (ETA is 2018-01-14)**_
+_**As for now Installation and Configuration guide / description is yet to complete (ETA is 2018-01-21)**_
 
 
 ## Base Solution Installation
