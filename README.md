@@ -60,7 +60,7 @@ Once the the solution has been installed, you need to install demo data ('Item S
 Now you can open an Account or Contact record and switch to the "DEMO" form:
 ![MultSelect Control on Form](Docs/Images/Demo_02.png)
 
-**_KNOWN ISSUE NOTE!_: _BEFORE_ REMOVING DEMO SOLUTION, remove all 'Item Set Configuration' records in the "Settings => AdvancedMultiSelect Item Set Configurations"**
+**_KNOWN ISSUE NOTE!_: _BEFORE_ REMOVING DEMO SOLUTION, remove all 'Item Set Configuration' records in the "Settings => AdvancedMultiSelect Item Set Configurations"**, otherwise you may meet an error after you remove demo solution. The issue will be fixed soon in the next update.
 
 ## 'Item Set' Configurations
 ... is yet to complete ...
