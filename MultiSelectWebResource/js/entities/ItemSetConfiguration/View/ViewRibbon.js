@@ -50,7 +50,7 @@ AdvancedMultiSelect.ItemSetConfiguration.View = function () {
   };
 
   var importConfiguration = function () {
-    Xrm.Utility.openWebResource("pavelkh_/html/ExportConfigurations/import.html", null, 800, 450);
+    Xrm.Utility.openWebResource("pavelkh_/html/ImportConfigurations/import.html", null, 800, 450);
   };
 
   return {

@@ -30,39 +30,7 @@
     <Folder Include="Scripts\" />
     <Folder Include="Scripts\ModificationTemplates\" />
     <Folder Include="Scripts\OtherHelpers\" />
-    <Folder Include="Temp\" />
-    <Folder Include="Temp\ManagedPreparation\" />
-    <Folder Include="Temp\ManagedPreparation\Entities\" />
-    <Folder Include="Temp\ManagedPreparation\Entities\tunexrm_tunemultiselectitemsetconfiguration\" />
-    <Folder Include="Temp\ManagedPreparation\Entities\tunexrm_tunemultiselectitemsetconfiguration\FormXml\" />
-    <Folder Include="Temp\ManagedPreparation\Entities\tunexrm_tunemultiselectitemsetconfiguration\FormXml\card\" />
-    <Folder Include="Temp\ManagedPreparation\Entities\tunexrm_tunemultiselectitemsetconfiguration\FormXml\mainInteractionCentric\" />
-    <Folder Include="Temp\ManagedPreparation\Entities\tunexrm_tunemultiselectitemsetconfiguration\FormXml\main\" />
-    <Folder Include="Temp\ManagedPreparation\Entities\tunexrm_tunemultiselectitemsetconfiguration\FormXml\mobile\" />
-    <Folder Include="Temp\ManagedPreparation\Entities\tunexrm_tunemultiselectitemsetconfiguration\FormXml\quick\" />
-    <Folder Include="Temp\ManagedPreparation\Entities\tunexrm_tunemultiselectitemsetconfiguration\SavedQueries\" />
-    <Folder Include="Temp\ManagedPreparation\OptionSets\" />
-    <Folder Include="Temp\ManagedPreparation\Other\" />
-    <Folder Include="Temp\ManagedPreparation\Other\Relationships\" />
-    <Folder Include="Temp\ManagedPreparation\PluginAssemblies\" />
-    <Folder Include="Temp\ManagedPreparation\PluginAssemblies\tuneMultiSelect-8338A190-C470-4BEA-A760-31925EB1CD5B\" />
-    <Folder Include="Temp\ManagedPreparation\SdkMessageProcessingSteps\" />
-    <Folder Include="Temp\ManagedPreparation\WebResources\" />
-    <Folder Include="Temp\ManagedPreparation\WebResources\tunexrm_\" />
-    <Folder Include="Temp\ManagedPreparation\WebResources\tunexrm_\html\" />
-    <Folder Include="Temp\ManagedPreparation\WebResources\tunexrm_\html\ExportConfigurations\" />
-    <Folder Include="Temp\ManagedPreparation\WebResources\tunexrm_\html\templates\" />
-    <Folder Include="Temp\ManagedPreparation\WebResources\tunexrm_\image\" />
-    <Folder Include="Temp\ManagedPreparation\WebResources\tunexrm_\js\" />
-    <Folder Include="Temp\ManagedPreparation\WebResources\tunexrm_\js\entities\" />
-    <Folder Include="Temp\ManagedPreparation\WebResources\tunexrm_\js\entities\ItemSetConfiguration\" />
-    <Folder Include="Temp\ManagedPreparation\WebResources\tunexrm_\js\entities\ItemSetConfiguration\Form\" />
-    <Folder Include="Temp\ManagedPreparation\WebResources\tunexrm_\js\entities\ItemSetConfiguration\ImportConfigurations\" />
-    <Folder Include="Temp\ManagedPreparation\WebResources\tunexrm_\js\entities\ItemSetConfiguration\View\" />
-    <Folder Include="Temp\ManagedPreparation\WebResources\tunexrm_\js\libraries\" />
-    <Folder Include="Temp\ManagedPreparation\Workflows\" />
     <Folder Include="Tools\" />
-    <Folder Include="Solutions\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Scripts\ImportUnmanagedSolutions.ps1" />
@@ -71,9 +39,6 @@
     <Compile Include="Scripts\ExportAndPrepareAllSolutions.ps1" />
     <Compile Include="Scripts\OtherHelpers\CreateSecureStringFile.ps1" />
     <Compile Include="Scripts\CommonLib.ps1" />
-    <Compile Include="Temp\ManagedPreparation\Entities\tunexrm_tunemultiselectitemsetconfiguration\FormXml\card\{13c726a3-d02b-489c-a1e7-4fcad6aa764a}.xml" />
-    <Compile Include="Temp\ManagedPreparation\Entities\tunexrm_tunemultiselectitemsetconfiguration\FormXml\main\{45281719-08ee-40e5-adad-0f264d571548}.xml" />
-    <Compile Include="Temp\ManagedPreparation\Entities\tunexrm_tunemultiselectitemsetconfiguration\FormXml\main\{b5fa4dfb-e897-45cf-abed-39a9b34a6e1a}.xml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Tools\SolutionPackager.exe" />

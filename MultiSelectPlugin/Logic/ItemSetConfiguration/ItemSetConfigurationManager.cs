@@ -811,13 +811,26 @@
         })
         .ToList();
 
-      var entityConfigs = configs
+      var initialEntityDynamicPluginStepsConfigs = configs
         .GroupBy(l => new { l.EntityName })
-        .Select(g => new
+        .Select(g => new EntityDynamicPluginStepsConfig
+                      {
+                        EntityName = g.Key.EntityName,
+                        Attributes = g.Select(i => i.DummySavingAttributeName).ToArray()
+                      })
+        .ToList();
+
+      var actualEntityDynamicPluginStepsConfigs = initialEntityDynamicPluginStepsConfigs
+        .Select(this.RefineEntityDynamicPluginStepsConfig)
+        .Where(refinedCfg => refinedCfg != null)
+        .ToList();
+
+      var entityConfigs = actualEntityDynamicPluginStepsConfigs
+        .Select(r => new
         {
-          g.Key.EntityName,
-          Attributes = string.Join(",", g.Select(i => i.DummySavingAttributeName))
-        });
+          r.EntityName,
+          Attributes = string.Join(",", r.Attributes)
+        }).ToList();
 
       const int DynamicPluginStepRank = 10;
       const string DynamicPluginStepPrefix = "[AdvancedMultiSelect] [Dynamically Created] ";
@@ -835,6 +848,42 @@
       foreach (var entityConfig in entityConfigs)
       {
         var entityName = entityConfig.EntityName;
+        var updateMessageFilterRef = GetSdkMessageFilter(orgCtx, updateMessageId, entityName);
+        var attributes = entityConfig.Attributes;
+        var updatePreValidationStep = new SdkMessageProcessingStep
+        {
+          Name = $"{DynamicPluginStepPrefix}[{entityName}] Save Item Set. Update. Pre-Validation.",
+          Mode = syncMode,
+          Rank = DynamicPluginStepRank,
+          Configuration = string.Empty,
+          Description = DynamicPluginStepDescription,
+          Stage = preValidationStage,
+          SupportedDeployment = serverDeploymentMode,
+          EventHandler = eventHandlerRef,
+          SdkMessageFilterId = updateMessageFilterRef,
+          SdkMessageId = updateMessageRef,
+          FilteringAttributes = attributes
+        };
+
+        orgCtx.AddObject(updatePreValidationStep);
+
+        var updatePostOperationStep = new SdkMessageProcessingStep
+        {
+          Name = $"{DynamicPluginStepPrefix}[{entityName}] Save Item Set. Update. Post-Operation.",
+          Mode = syncMode,
+          Rank = DynamicPluginStepRank,
+          Configuration = string.Empty,
+          Description = DynamicPluginStepDescription,
+          Stage = postOperationStage,
+          SupportedDeployment = serverDeploymentMode,
+          EventHandler = eventHandlerRef,
+          SdkMessageFilterId = updateMessageFilterRef,
+          SdkMessageId = updateMessageRef,
+          FilteringAttributes = attributes
+        };
+
+        orgCtx.AddObject(updatePostOperationStep);
+
         var createMessageFilterRef = GetSdkMessageFilter(orgCtx, createMessageId, entityName);
         var createPreValidationStep = new SdkMessageProcessingStep
         {
@@ -867,44 +916,58 @@
         };
 
         orgCtx.AddObject(createPostOperationStep);
-
-        var updateMessageFilterRef = GetSdkMessageFilter(orgCtx, updateMessageId, entityName);
-        var updatePreValidationStep = new SdkMessageProcessingStep
-        {
-          Name = $"{DynamicPluginStepPrefix}[{entityName}] Save Item Set. Update. Pre-Validation.",
-          Mode = syncMode,
-          Rank = DynamicPluginStepRank,
-          Configuration = string.Empty,
-          Description = DynamicPluginStepDescription,
-          Stage = preValidationStage,
-          SupportedDeployment = serverDeploymentMode,
-          EventHandler = eventHandlerRef,
-          SdkMessageFilterId = updateMessageFilterRef,
-          SdkMessageId = updateMessageRef,
-          FilteringAttributes = entityConfig.Attributes
-        };
-
-        orgCtx.AddObject(updatePreValidationStep);
-
-        var updatePostOperationStep = new SdkMessageProcessingStep
-        {
-          Name = $"{DynamicPluginStepPrefix}[{entityName}] Save Item Set. Update. Post-Operation.",
-          Mode = syncMode,
-          Rank = DynamicPluginStepRank,
-          Configuration = string.Empty,
-          Description = DynamicPluginStepDescription,
-          Stage = postOperationStage,
-          SupportedDeployment = serverDeploymentMode,
-          EventHandler = eventHandlerRef,
-          SdkMessageFilterId = updateMessageFilterRef,
-          SdkMessageId = updateMessageRef,
-          FilteringAttributes = entityConfig.Attributes
-        };
-
-        orgCtx.AddObject(updatePostOperationStep);
       }
 
       orgCtx.SaveChanges();
     }
+
+    private EntityDynamicPluginStepsConfig RefineEntityDynamicPluginStepsConfig(EntityDynamicPluginStepsConfig config)
+    {
+      var entityFilter = new MetadataFilterExpression(LogicalOperator.And);
+      entityFilter.Conditions.Add(
+        new MetadataConditionExpression("LogicalName", MetadataConditionOperator.Equals, config.EntityName));
+      var entityProperties = new MetadataPropertiesExpression { AllProperties = false };
+      entityProperties.PropertyNames.AddRange("LogicalName", "Attributes");
+      var attributeFilter = new MetadataFilterExpression(LogicalOperator.And);
+      attributeFilter.Conditions.Add(
+        new MetadataConditionExpression("LogicalName", MetadataConditionOperator.In, config.Attributes));
+      var attributeProperties = new MetadataPropertiesExpression() { AllProperties = false };
+      attributeProperties.PropertyNames.AddRange("LogicalName");
+      var attributeQuery = new AttributeQueryExpression()
+      {
+        Criteria = attributeFilter,
+        Properties = attributeProperties
+      };
+
+      var query = new EntityQueryExpression
+      {
+        Criteria = entityFilter,
+        Properties = entityProperties,
+        AttributeQuery = attributeQuery,
+      };
+
+      var request = new RetrieveMetadataChangesRequest { Query = query };
+      var pluginContext = this.PluginContext;
+      var respones = (RetrieveMetadataChangesResponse)pluginContext.OrgCtx.Execute(request);
+      var entityMetadata = respones.EntityMetadata.FirstOrDefault();
+      if (entityMetadata == null || !entityMetadata.Attributes.Any())
+      {
+        return null;
+      }
+
+      return new EntityDynamicPluginStepsConfig()
+              {
+                EntityName  = config.EntityName,
+                Attributes = entityMetadata.Attributes.Select(r => r.LogicalName).ToArray()
+              }; 
+    }
+
+    private class EntityDynamicPluginStepsConfig
+    {
+      public string EntityName { get; set; }
+
+      public string[] Attributes { get; set; }
+    }
+
   }
 }
