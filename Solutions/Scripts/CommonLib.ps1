@@ -70,8 +70,14 @@ function Build-AdvancedMultiSelectManagedSolution {
   Write-Verbose "'$solutionName' Managed solution has been exported to $solutionFilePath"
   $tempExtractFolder = "$invokationFolder\..\Temp\Preparation\"
   $solutionPackagerPath = "$invokationFolder\..\Tools\SolutionPackager.exe"
+
+  # cleaning the temporary folder as a separate step (not along with unpack in order to keep .gitignore) 
+  Write-Verbose "Cleaning up '$tempExtractFolder' temporary folder."
+  Get-ChildItem "$tempExtractFolder" -Exclude .gitignore |  Remove-Item -Recurse -Force
+  Write-Verbose "The temporary folder has been cleaned up."
+  
   Write-Verbose "Extracting '$solutionFilePath' Managed solution file into a temporary folder ($tempExtractFolder)"
-  & $solutionPackagerPath /action:extract /allowDelete:Yes /zipFile:$solutionFilePath /folder:$tempExtractFolder /packagetype:Managed #| Tee-Object -Variable scriptOutput | Out-Null
+  & $solutionPackagerPath /action:extract /allowDelete:No /zipFile:$solutionFilePath /folder:$tempExtractFolder /packagetype:Managed #| Tee-Object -Variable scriptOutput | Out-Null
 
   Write-Verbose "The '$solutionFilePath' Managed solution file has been extracted into $tempExtractFolder temporary folder."
   Write-Verbose "Adding SiteMap_managed.xml to the extracted solution."
@@ -105,7 +111,7 @@ function Build-AdvancedMultiSelectManagedSolution {
   Write-Verbose "The '$solutionFilePath' Managed Solution has been packed."
 
   Write-Verbose "Cleaning up '$tempExtractFolder' temporary folder."
-  Remove-Item "$tempExtractFolder\*" -recurse
+  Get-ChildItem "$tempExtractFolder" -Exclude .gitignore |  Remove-Item -Recurse -Force
   Write-Verbose "The temporary folder has been cleaned up."
 }
 
