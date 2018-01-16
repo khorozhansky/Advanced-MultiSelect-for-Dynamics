@@ -4,14 +4,14 @@
 
 ### You most likely are interested in this solution if
 
-* you have Many-To-Many relationships and would like to associate / disassociate related records in a quick, convenient and flexible way using a set of appropriate checkboxes on a form
+* you have Many-To-Many (N:N) relationships and would like to associate / disassociate related records in a quick, convenient and flexible way using a set of appropriate checkboxes on a form
 * you are using either Dynamics CRM 2016 Update 1 (**8.1**) or Dynamics 365 (**8.2**) version and you would like to have multi select / multicheckbox functionality on a form and don't want to create a lot of dedicated checkbox entity fields for each an option
 * you are using the new version of Dynamics 365 (**9.0**) (_where a new multi-select functionality introduced out-of-box_) and find this out-of-box feature does not suit your needs (for example, you have to make changes in metadata each time you need to add/remove list options (instead of giving some users an ability to easily maintain the lists), you cannot support 'obsolete' options, and so forth). 
 
 ## Features
 ![MultSelect Control on Form](Docs/Images/Demo_01.png)
 
-* Works for _any custom_ Many-to-Many relationships 
+* Works for _any custom_ Many-to-Many relationships (including 'self-referenced' N:N relationships, e.g. account <=> account)
 * Works for out-of-box Marketing List Many-to-Many relationships
 * Can be easily extended to work with any other out-of-box Many-to-Many relationships
 
@@ -32,54 +32,35 @@
 * Works for Dynamics CRM 2016 Update 1 (v8.1) and Dynamics 365 (v8.2 and v9.0)
 
 * Both Managed and Unmanaged Solutions are provided.  
-* In addition to the base solution, a special DEMO solution can be installed which contains some ready-to-use examples (you can simply remove it (install Managed one)
+* In addition to the base solution, a special DEMO solution can be installed which contains some ready-to-use examples.
+
 
 ### Does it use "supported" customization?
-**All the _key functionality_ uses "supported" customization.**
-There is only a small part of "unsupported" customization in the "Configuration Wizard". Via an embedded 'advanced find' feature, it assists you in specifying query to build a list of related options. As for now, it works for all versions above. However, even in case this part stops working _in further Dynamics version_, it won't cause an error and you as always will be able to specify the query via Fetch Xml directly.
+**All the _key functionality_ uses "supported" customization.** 
 
+There is only a small part of "unsupported" customization in the "Configuration Wizard": it's embedded 'Advanced Find' builder feature which assists you in specifying query to build a list of related options. As for now, it works for all versions above. However, even in case this part stops working due to some unexpected core changes in Dynamics, it won't cause an error and you as always will be able to specify the query via Fetch Xml directly.
 
+Note: "Configuration Wizard" also includes a wizard which makes actual modification in forms automatically. Modifying FormXml is considered as "supported" customization in Dynamics.
 
+***
 
-# Installation and Configuration Guide
+## Installation and Configuration Guide
 
-_**As for now Installation and Configuration guide / description is yet to complete (ETA is 2018-01-21)**_
+Please read **[Installation and Configuration Guide](/wiki/Installation-and-Configuration-Guide)** in the Wiki to understand how to install base and demo solutions as well as how to start configuring settings to meet your needs.   
 
+***
 
-## Base Solution Installation
-Install a 'Base 'Advanced MultiSelect for Dynamics' Managed solution from here [Last Release](https://github.com/khorozhansky/Advanced-MultiSelect-for-Dynamics/releases/latest) 
+## Some Technical Details
+For those who want to dig deeper into technical details can read [Some Technical Details](/wiki/Some-Technical-Details) in the Wiki.
 
-## Demo Solution Installation
-Install a DEMO Managed solution from here [Last Release](https://github.com/khorozhansky/Advanced-MultiSelect-for-Dynamics/releases/latest)  
-The solution contains additional custom entity (Interests) and additional demo forms for Account and Contact entities.
-Once the the solution has been installed, you need to install demo data ('Item Set' configurations and sample data in Interests entity):
-![MultSelect Control on Form](Docs/Images/InstallDemo_01.png)
-![MultSelect Control on Form](Docs/Images/InstallDemo_02.png)
-![MultSelect Control on Form](Docs/Images/InstallDemo_03.png)
+***
 
-Now you can open an Account or Contact record and switch to the "DEMO" form:
-![MultSelect Control on Form](Docs/Images/Demo_02.png)
-
-**_KNOWN ISSUE NOTE!_: _BEFORE_ REMOVING DEMO SOLUTION, remove all 'Item Set Configuration' records in the "Settings => AdvancedMultiSelect Item Set Configurations"**, otherwise you may meet an error after you remove demo solution. The issue will be fixed soon in the next update.
-
-## 'Item Set' Configurations
-... is yet to complete ...
-![MultSelect Control on Form](Docs/Images/Configuration_01.png)
-![MultSelect Control on Form](Docs/Images/Configuration_02.png)
-...
-![MultSelect Control on Form](Docs/Images/Configuration_05.png)
-![MultSelect Control on Form](Docs/Images/Configuration_06.png)
-![MultSelect Control on Form](Docs/Images/Configuration_07.png)
-![MultSelect Control on Form](Docs/Images/Configuration_08.png)
-![MultSelect Control on Form](Docs/Images/Configuration_09.png)
-![MultSelect Control on Form](Docs/Images/Configuration_10.png)
-![MultSelect Control on Form](Docs/Images/Configuration_11.png)
-![MultSelect Control on Form](Docs/Images/Configuration_12.png)
-![MultSelect Control on Form](Docs/Images/Configuration_13.png)
-![MultSelect Control on Form](Docs/Images/Configuration_14.png)
-![MultSelect Control on Form](Docs/Images/Configuration_15.png)
-![MultSelect Control on Form](Docs/Images/Configuration_16.png)
-![MultSelect Control on Form](Docs/Images/Configuration_17.png)
-![MultSelect Control on Form](Docs/Images/Configuration_18.png)
-
-This project is a brand new revised and improved version of the https://tunemulticheckbox.codeplex.com project
+### Credits
+Big thanks to the following tools, add-ons and frameworks which are used inside the project or during its development:
+* 
+* 
+* 
+* 
+* 
+-----------------------
+This project is a brand new revised and improved version of my old https://tunemulticheckbox.codeplex.com project.
