@@ -1,6 +1,6 @@
 # Advanced MultiSelect for Dynamics 365 / Dynamics CRM 
 
-'Advanced MultiSelect for Dynamics' is a control that represents a set of related data items (on a form) and gives a user an ability to associate/disassociate records of related entities in a quick and convenient way.
+Advanced MultiSelect for Dynamics 365 / Dynamics CRM is a multi-select / multi-checkbox control on a form. It represents a set of related data items (based on N:N relations + FetchXml) and gives a user an ability to associate/disassociate records of related entities in a quick and convenient way.
 
 ### You most likely are interested in this solution if
 
