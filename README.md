@@ -63,6 +63,7 @@ If you would like to dig deeper into technical details find [Some Technical Deta
 * Scott Durow's [Ribbon Workbench](https://www.xrmtoolbox.com/plugins/RibbonWorkbench2016)
 * Daryl LaBar's [DLaB.Xrm.XrmToolBoxTools](https://github.com/daryllabar/DLaB.Xrm.XrmToolBoxTools)
 * Tanguy Touzard's [XrmToolBox](https://www.xrmtoolbox.com)
+* Microsoft.Xrm.Data.PowerShell https://github.com/seanmcne/Microsoft.Xrm.Data.PowerShell
 * Xrm.Page.js http://msxrmtools.com 
 * KnockoutJS http://knockoutjs.com
 * jQuery https://jquery.com
