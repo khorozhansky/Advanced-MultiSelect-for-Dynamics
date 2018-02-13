@@ -12,14 +12,6 @@
       FORM_TYPE_BULK_EDIT: 6
     };
 
-    function lockBackspace() {
-      $(window.document).unbind('keydown').bind('keydown', function (event) {
-        if (event.keyCode === 8) {
-          event.preventDefault();
-        }
-      });
-    }
-
     function getWebResourceParam(name) {
       if (location.search !== "") {
         var vals = location.search.substr(1).split("&");
@@ -231,19 +223,6 @@
           page.data.entity.addOnSave(formTypeChangeHandler);
         } catch (e) {} 
       };
-
-      //var subscribeOnItemSetSelectedChange = function () {
-      //  self.ItemSetSelected.subscribe(function (changes) {
-      //    changes.forEach(function (change) {
-      //      if (change.status === 'added' || change.status === 'deleted') {
-      //        var value = buildValueForSavingAttr();
-      //        self.SavingAttr.setSubmitMode("always");
-      //        self.SavingAttr.setValue(value);
-      //      }
-      //    });
-
-      //  }, null, "arrayChange");
-      //}
 
       self.Initialize = function () {
         attachOnFormLoad();
