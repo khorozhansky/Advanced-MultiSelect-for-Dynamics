@@ -57,9 +57,11 @@
     <Content Include="html\ImportConfigurations\import.min.html">
       <DependentUpon>import.html</DependentUpon>
     </Content>
-    <Content Include="html\templates\selectize.bootstrap3.css" />
     <Content Include="html\templates\selectize.css" />
-    <Content Include="html\templates\selectize.default.css" />
+    <Content Include="html\templates\selectize.min.css">
+      <DependentUpon>selectize.css</DependentUpon>
+    </Content>
+    <Content Include="html\templates\selectize_01.css" />
     <Content Include="html\templates\selectize_01.html" />
     <Content Include="html\templates\checkboxes_four_columns.html" />
     <Content Include="html\templates\checkboxes_four_columns.min.css">
@@ -83,6 +85,9 @@
     <Content Include="html\templates\checkboxes_two_columns.html" />
     <Content Include="html\templates\checkboxes_two_columns.min.css">
       <DependentUpon>checkboxes_two_columns.css</DependentUpon>
+    </Content>
+    <Content Include="html\templates\selectize_01.min.css">
+      <DependentUpon>selectize_01.css</DependentUpon>
     </Content>
     <Content Include="image\add_control_wizard_16.png" />
     <Content Include="image\add_control_wizard_32.png" />
@@ -158,7 +163,6 @@
   <ItemGroup>
     <None Include="bundleconfig.json" />
     <Content Include="packages.config" />
-    <Content Include="html\templates\remove_button.less" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
