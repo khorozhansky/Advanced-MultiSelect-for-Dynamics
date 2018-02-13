@@ -19,8 +19,8 @@ Advanced MultiSelect for Dynamics 365 / Dynamics CRM is a multi-select / multi-c
 * It works smoothly for both "Update" and "_Create_" record mode ('Form Type')
 * The list of options can be customized flexibly using **Fetch Xml** or via an embedded wizard to build query "_like in 'Advanced Find'_" (you can select specific related records to show (e.g. that meet certain criteria you need))
 * The list of options can be sorted flexibly using Fetch Xml
-* You can use several existing templates to represent list of options on a form 
-* You can create you own templates or modify existing ones as needed (html + css, and using knockout template styles)
+* You can use several existing templates to represent list of options on a form. It can be a special [Selectize.js](http://selectize.github.io/selectize.js) template or different kinds of checkbox lists.
+* You can create you own templates or modify existing ones as needed (html + css, and using knockout template styles and/or based on  [Selectize.js](http://selectize.github.io/selectize.js) template styles)
 * Configuration Wizard assists you in configuring all the settings and even can embed multi-select control into a form automatically (you do not need to make changes in form editor to add mult-select control on a form)
 
 * Works in accordance with security settings on both sides of Many-To-Many relationship  
@@ -66,6 +66,7 @@ If you would like to dig deeper into technical details find [Some Technical Deta
 * Microsoft.Xrm.Data.PowerShell https://github.com/seanmcne/Microsoft.Xrm.Data.PowerShell
 * Xrm.Page.js http://msxrmtools.com 
 * KnockoutJS http://knockoutjs.com
+* Selectize.js http://selectize.github.io/selectize.js
 * jQuery https://jquery.com
 * Mads Kristensen's [BundlerMinifier](https://github.com/madskristensen/BundlerMinifier) 
 
