@@ -11,7 +11,7 @@ try{
   Write-Output "Connecting to a server..."
   $conn = Build-CrmConnection -InteractiveMode -Verbose
   $solutionFolder = "$invokationFolder\Solutions\"
-  $version = "2.2.1.1"
+  $version = "2.2.1.2"
   Import-AdvancedMultiSelectSolutions -CrmConn $conn -Version $version -OverwriteUnManagedCustomizations -Verbose
 }
 
