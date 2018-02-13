@@ -3,168 +3,126 @@
     "outputFileName": "js/entities/ItemSetConfiguration/Form/AddControlWizardForm.min.js",
     "inputFiles": [
       "js/entities/ItemSetConfiguration/Form/AddControlWizardForm.js"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
   },
   {
     "outputFileName": "js/entities/ItemSetConfiguration/Form/Common.min.js",
     "inputFiles": [
       "js/entities/ItemSetConfiguration/Form/Common.js"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
   },
   {
     "outputFileName": "js/entities/ItemSetConfiguration/Form/MainForm.min.js",
     "inputFiles": [
       "js/entities/ItemSetConfiguration/Form/MainForm.js"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
   },
   {
     "outputFileName": "js/entities/ItemSetConfiguration/ImportConfigurations/import.min.js",
     "inputFiles": [
       "js/entities/ItemSetConfiguration/ImportConfigurations/import.js"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
   },
   {
     "outputFileName": "js/entities/ItemSetConfiguration/View/ViewRibbon.min.js",
     "inputFiles": [
       "js/entities/ItemSetConfiguration/View/ViewRibbon.js"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
   },
   {
     "outputFileName": "js/AdvFindUtils.min.js",
     "inputFiles": [
       "js/AdvFindUtils.js"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
   },
   {
     "outputFileName": "js/CrmWebApiFacade.min.js",
     "inputFiles": [
       "js/CrmWebApiFacade.js"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
   },
   {
     "outputFileName": "js/FormSaveModes.min.js",
     "inputFiles": [
       "js/FormSaveModes.js"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
   },
   {
     "outputFileName": "js/FormTypes.min.js",
     "inputFiles": [
       "js/FormTypes.js"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
   },
   {
     "outputFileName": "js/FormUtils.min.js",
     "inputFiles": [
       "js/FormUtils.js"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
   },
   {
     "outputFileName": "js/XmlUtils.min.js",
     "inputFiles": [
       "js/XmlUtils.js"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
   },
   {
     "outputFileName": "html/templates/checkboxes_one_column.min.css",
     "inputFiles": [
       "html/templates/checkboxes_one_column.css"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
   },
   {
     "outputFileName": "html/templates/checkboxes_three_columns.min.css",
     "inputFiles": [
       "html/templates/checkboxes_three_columns.css"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
   },
   {
     "outputFileName": "html/templates/checkboxes_two_columns.min.css",
     "inputFiles": [
       "html/templates/checkboxes_two_columns.css"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
   },
   {
     "outputFileName": "html/templates/checkboxes_four_columns.min.css",
     "inputFiles": [
       "html/templates/checkboxes_four_columns.css"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
   },
   {
     "outputFileName": "html/ImportConfigurations/import.min.css",
     "inputFiles": [
       "html/ImportConfigurations/import.css"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
   },
   {
     "outputFileName": "html/templates/checkboxes_one_column_with_description.min.css",
     "inputFiles": [
       "html/templates/checkboxes_one_column_with_description.css"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
   },
   {
     "outputFileName": "html/ImportConfigurations/import.min.html",
     "inputFiles": [
       "html/ImportConfigurations/import.html"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
-  },
-  {
-    "outputFileName": "js/AdvancedMultiSelect.min.js",
-    "inputFiles": [
-      "js/AdvancedMultiSelect.js"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
   },
   {
     "outputFileName": "html/templates/selectize.min.css",
     "inputFiles": [
       "html/templates/selectize.css"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
   },
   {
     "outputFileName": "html/templates/selectize_01.min.css",
     "inputFiles": [
       "html/templates/selectize_01.css"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
+  },
+  {
+    "outputFileName": "js/AdvancedMultiSelect.min.js",
+    "inputFiles": [
+      "js/AdvancedMultiSelect.js"
+    ]
   }
 ]
