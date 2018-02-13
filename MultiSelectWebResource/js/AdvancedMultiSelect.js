@@ -12,11 +12,13 @@
       FORM_TYPE_BULK_EDIT: 6
     };
 
-    $(window.document).unbind('keydown').bind('keydown', function (event) {
-      if (event.keyCode === 8) {
-        event.preventDefault();
-      }
-    });
+    function lockBackspace() {
+      $(window.document).unbind('keydown').bind('keydown', function (event) {
+        if (event.keyCode === 8) {
+          event.preventDefault();
+        }
+      });
+    }
 
     function getWebResourceParam(name) {
       if (location.search !== "") {
@@ -65,6 +67,7 @@
       var self = this;
       self.DataLoaded = ko.observable(false);
       self.ItemSet = ko.observableArray([]);
+      self.ItemSetSelected = ko.observableArray([]);
       self.ItemSetByRows = ko.observableArray([]);
       self.ColumnCount = ko.observable((parseInt(columnCount) || 1));
       self.SavingAttr = null;
@@ -74,13 +77,26 @@
       self.AllowUpdate = ko.observable(false);
       self.ReadOnlyMode = ko.observable(true);
       self.Visible = ko.observable(true);
+      self.SelectizeMode = ko.observable(false);
+
+      //self.Test1 = function() {
+      //  debugger;
+      //}
 
       var buildValueForSavingAttr = function () {
         var checkedSet = [];
-        var arr = self.ItemSet();
-        for (var i = 0, max = arr.length; i < max; i++) {
-          if (arr[i].Value()) {
-            checkedSet.push(arr[i].Id);
+        var arr, i, max;
+        if (self.SelectizeMode()) {
+          arr = self.ItemSetSelected();
+          for (i = 0, max = arr.length; i < max; i++) {
+            checkedSet.push(arr[i]);
+          }
+        } else {
+          arr = self.ItemSet();
+          for (i = 0, max = arr.length; i < max; i++) {
+            if (arr[i].Value()) {
+              checkedSet.push(arr[i].Id);
+            }
           }
         }
 
@@ -216,6 +232,19 @@
         } catch (e) {} 
       };
 
+      //var subscribeOnItemSetSelectedChange = function () {
+      //  self.ItemSetSelected.subscribe(function (changes) {
+      //    changes.forEach(function (change) {
+      //      if (change.status === 'added' || change.status === 'deleted') {
+      //        var value = buildValueForSavingAttr();
+      //        self.SavingAttr.setSubmitMode("always");
+      //        self.SavingAttr.setValue(value);
+      //      }
+      //    });
+
+      //  }, null, "arrayChange");
+      //}
+
       self.Initialize = function () {
         attachOnFormLoad();
         var dfd = $.Deferred();
@@ -229,6 +258,7 @@
 
         getData().then(
           function () {
+            var selectizeMode = self.SelectizeMode();
             var savingAttrValue = getCurrentSavingAttrValueSet();
             var pluginErrorLoading = !!savingAttrValue;
             setReadOnlyMode();
@@ -243,9 +273,16 @@
                 selected = item.Selected;
               }
 
-              var selectedObservable = ko.observable(selected);
-              selectedObservable.subscribe(onSelectedChanged);
-              item.Value = selectedObservable;
+              if (selectizeMode) {
+                if (selected) {
+                  self.ItemSetSelected.push(item.Id);
+                }
+              } else {
+                var selectedObservable = ko.observable(selected);
+                selectedObservable.subscribe(onSelectedChanged);
+                item.Value = selectedObservable;
+              }
+
               result.push(item);
             }
 
@@ -255,30 +292,31 @@
             var value = buildValueForSavingAttr();
 
             self.SavingAttr.setValue(value);
+            if (!selectizeMode) {
+              var resultByRows = [],
+                row,
+                colCount = self.ColumnCount();
+              for (var j = 0, m = result.length; j < m; j++) {
+                if (j % colCount === 0) {
+                  if (row) {
+                    resultByRows.push(row);
+                  }
 
-            var resultByRows = [],
-              row,
-              colCount = self.ColumnCount();
-
-            for (var j = 0, m = result.length; j < m; j++) {
-              if (j % colCount === 0) {
-                if (row) {
-                  resultByRows.push(row);
+                  row = [];
                 }
 
-                row = [];
+                // ReSharper disable once QualifiedExpressionMaybeNull
+                // ReSharper disable once UsageOfPossiblyUnassignedValue
+                row.push(result[j]);
               }
 
-              // ReSharper disable once QualifiedExpressionMaybeNull
-              // ReSharper disable once UsageOfPossiblyUnassignedValue
-              row.push(result[j]);
+              if (row) {
+                resultByRows.push(row);
+              }
+
+              self.ItemSetByRows = ko.observableArray(resultByRows);
             }
 
-            if (row) {
-              resultByRows.push(row);
-            }
-
-            self.ItemSetByRows = ko.observableArray(resultByRows);
             self.DataLoaded(true);
             dfd.resolve();
           },
@@ -302,6 +340,13 @@
         );
 
         return dfd.promise();
+      };
+
+      self.SetItemSetSelected = function(selectedItems) {
+        self.ItemSetSelected(selectedItems);
+        var value = buildValueForSavingAttr();
+        self.SavingAttr.setSubmitMode("always");
+        self.SavingAttr.setValue(value);
       };
     };
 
