@@ -478,7 +478,7 @@ AdvancedMultiSelect.ItemSetConfiguration.Form = function () {
 
   var setDefaultValues = function() {
     attrs.sectionLocation.setValue(newSectionLocationTypes.BeforeSection);
-    attrs.numberOfRows.setValue(5);
+    attrs.numberOfRows.setValue(8);
   };
 
   var navigateToMainForm = function () {

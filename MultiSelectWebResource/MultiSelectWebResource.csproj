@@ -57,6 +57,10 @@
     <Content Include="html\ImportConfigurations\import.min.html">
       <DependentUpon>import.html</DependentUpon>
     </Content>
+    <Content Include="html\templates\selectize.bootstrap3.css" />
+    <Content Include="html\templates\selectize.css" />
+    <Content Include="html\templates\selectize.default.css" />
+    <Content Include="html\templates\selectize_01.html" />
     <Content Include="html\templates\checkboxes_four_columns.html" />
     <Content Include="html\templates\checkboxes_four_columns.min.css">
       <DependentUpon>checkboxes_four_columns.css</DependentUpon>
@@ -136,6 +140,7 @@
       <DependentUpon>FormUtils.js</DependentUpon>
     </Content>
     <Content Include="js\js-vsdoc\Xrm.Page.js" />
+    <Content Include="js\libraries\selectize.js" />
     <Content Include="js\XmlUtils.js" />
     <Content Include="js\FormUtils.js" />
     <Content Include="js\libraries\jquery.js" />
@@ -153,6 +158,7 @@
   <ItemGroup>
     <None Include="bundleconfig.json" />
     <Content Include="packages.config" />
+    <Content Include="html\templates\remove_button.less" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
