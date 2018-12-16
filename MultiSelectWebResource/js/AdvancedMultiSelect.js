@@ -30,7 +30,7 @@
         }
       }
 
-      return null;
+      return "";
     }
 
     function getWebResourceDataParams() {
