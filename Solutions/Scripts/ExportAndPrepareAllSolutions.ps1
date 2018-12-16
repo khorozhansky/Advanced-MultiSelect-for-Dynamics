@@ -12,7 +12,7 @@ try{
 
   $invokationFolder = $PSScriptRoot
   write-output $hst.Name
-  Import-Module ("$invokationFolder\CommonLib.ps1")
+  Import-Module ("$invokationFolder\CommonLib.ps1") -Force
 
   ## ----------------------- UNCOMMENT THIS AS NEEDED TO SETUP SMOOTH CONNECTION -----------------------------
   ## Note: 
@@ -42,6 +42,7 @@ try{
   # Connecting to a Dynamics instance/organization using "INTERACTIVE MODE" / WIZARD MODE
   # Note: Comment the row below in case you decided to uncomment the block above to connect smoothly   
   $conn = Build-CrmConnection -InteractiveMode -Verbose
+  Set-CrmConnectionTimeout -conn $conn -TimeoutInSeconds 600
   Export-AdvancedMultiSelectSolutions -CrmConn $conn -Verbose
 
   Export-DemoForAdvancedMultiSelectSolutions -CrmConn $conn -Verbose

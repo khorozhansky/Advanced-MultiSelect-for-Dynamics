@@ -8,6 +8,9 @@
     <RootNamespace>MyApplication</RootNamespace>
     <AssemblyName>MyApplication</AssemblyName>
     <Name>Solutions</Name>
+    <PackageEntryPoint>Scripts\CommonLib.ps1</PackageEntryPoint>
+    <DotNetVersion>v4.7.1</DotNetVersion>
+    <PackageType>Console</PackageType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
