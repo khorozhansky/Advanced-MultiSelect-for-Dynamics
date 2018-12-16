@@ -1,4 +1,4 @@
-﻿Import-Module Microsoft.Xrm.Data.Powershell
+﻿Import-Module Microsoft.Xrm.Data.Powershell -Force
 
 $script:MainSolutionUniqueName = "AdvancedMultiSelectForDynamics"
 $script:DemoSolutionUniqueName = "DemoForAdvancedMultiSelect"
